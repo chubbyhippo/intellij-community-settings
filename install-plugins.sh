@@ -4,6 +4,8 @@ cmd=idea
 if uname | grep -q "^MINGW"; then
   if command -v idea.cmd >/dev/null 2>&1; then
     cmd=idea.cmd
+  elif command -v idea.bat >/dev/null 2>&1; then
+    cmd=idea.bat
   elif command -v idea64 >/dev/null 2>&1; then
     cmd=idea64
   else

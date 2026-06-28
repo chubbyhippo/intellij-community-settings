@@ -1,0 +1,7 @@
+== curl
+:raw_ideavimrc_url: https://raw.githubusercontent.com/chubbyhippo/intellij-community-settings/refs/heads/main/ideavim
+
+[source,shell,subs="attributes"]
+----
+curl {raw_ideavimrc_url}/.ideavimrc -o ~/.ideavimrc
+----

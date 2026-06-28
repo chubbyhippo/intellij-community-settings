@@ -1,0 +1,139 @@
+<templateSet group="javaMockito">
+  <template name="spy" value="org.mockito.Mockito.spy($EXPR$)$END$" description="Mockito.spy" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="mock" value="org.mockito.Mockito.mock($END$)&#10;" description="Mockito.mock" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="any" value="org.mockito.Mockito.any()" description="Mockito.any" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyString" value="org.mockito.Mockito.anyString()" description="Mockito.anyString" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyCollection" value="org.mockito.Mockito.anyCollection()" description="Mockito.anyCollection" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyByte" value="org.mockito.Mockito.anyByte()" description="Mockito.anyByte" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyChar" value="org.mockito.Mockito.anyChar()" description="Mockito.anyChar" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyDouble" value="org.mockito.Mockito.anyDouble()" description="Mockito.anyDouble" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyFloat" value="org.mockito.Mockito.anyFloat()" description="Mockito.anyFloat" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyInt" value="org.mockito.Mockito.anyInt()" description="Mockito.anyInt" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyList" value="org.mockito.Mockito.anyList()" description="Mockito.anyList" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyIterable" value="org.mockito.Mockito.anyIterable()" description="Mockito.anyIterable" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyLong" value="org.mockito.Mockito.anyLong()" description="Mockito.anyLong" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anyMap" value="org.mockito.Mockito.anyMap()" description="Mockito.anyMap" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="anySet" value="org.mockito.Mockito.anySet()" description="Mockito.anySet" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="extendWithMockitoExtension" value="@org.junit.jupiter.api.extension.ExtendWith(org.mockito.junit.jupiter.MockitoExtension.class)" description="@ExtendWith(MockitoExtension.class)" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="mockStaticExample" value="@org.junit.jupiter.api.Test&#10;    @org.junit.jupiter.api.DisplayName(&quot;test mock files.exists&quot;)&#10;    void testMockFilesExists() {&#10;        try (org.mockito.MockedStatic&lt;java.nio.file.Files&gt; filesMock = org.mockito.Mockito.mockStatic(java.nio.file.Files.class)) {&#10;            java.nio.file.Path mockPath = java.nio.file.Path.of(&quot;/test/file.txt&quot;);&#10;&#10;            filesMock.when(() -&gt; java.nio.file.Files.exists(mockPath))&#10;                    .thenReturn(true);&#10;&#10;            boolean exists = java.nio.file.Files.exists(mockPath);&#10;&#10;            org.assertj.core.api.Assertions.assertThat(exists).isTrue();&#10;&#10;            filesMock.verify(() -&gt; java.nio.file.Files.exists(mockPath));&#10;        }&#10;    }" description="Mockito.mockStatic Example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+      <option name="JAVA_NORMAL_CLASS_DECLARATION_WITH_INSTANCE_MAIN" value="true" />
+    </context>
+  </template>
+  <template name="mockConstructionExample" value="@org.junit.jupiter.api.Test&#10;    @org.junit.jupiter.api.DisplayName(&quot;test mock construction&quot;)&#10;    void testMockConstruction() {&#10;        try (org.mockito.MockedConstruction&lt;ExampleClass&gt; mocked = org.mockito.Mockito.mockConstruction(ExampleClass.class,&#10;                (mock, _) -&gt; {&#10;                    org.mockito.Mockito.when(mock.isTrue()).thenReturn(false);&#10;                })) {&#10;&#10;            ExampleClass example = new ExampleClass();&#10;            java.lang.Boolean result = example.isTrue();&#10;&#10;            org.assertj.core.api.Assertions.assertThat(result).isFalse();&#10;            org.assertj.core.api.Assertions.assertThat(mocked.constructed()).hasSize(1);&#10;        }&#10;    }&#10;&#10;    private static class ExampleClass {&#10;        public java.lang.Boolean isTrue() {&#10;            return true;&#10;        }&#10;    }" description="Mockito.MockConstruction Example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+      <option name="JAVA_NORMAL_CLASS_DECLARATION_WITH_INSTANCE_MAIN" value="true" />
+    </context>
+  </template>
+  <template name="mockStatic" value="try (org.mockito.MockedStatic&lt;$CLASS$&gt; $VAR$ = org.mockito.Mockito.mockStatic($CLASS$.class)) {&#10;    $VAR$.when(() -&gt; $CLASS$.$END$);&#10;}" description="Mockito.mockStatic" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="CLASS" expression="variableOfType(Type)" defaultValue="" alwaysStopAt="true" />
+    <variable name="VAR" expression="suggestVariableName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mockConstruction" value="try (org.mockito.MockedConstruction&lt;$CLASS$&gt; $VAR$ = org.mockito.Mockito.mockConstruction($CLASS$.class,&#10;                (mock, context) -&gt; {&#10;                    when(mock.$END$).thenReturn();&#10;                })) {&#10;        }" description="Mockito.mockConstruction" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="CLASS" expression="variableOfType(Type)" defaultValue="" alwaysStopAt="true" />
+    <variable name="VAR" expression="suggestVariableName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>

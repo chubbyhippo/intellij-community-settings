@@ -1,0 +1,21 @@
+<templateSet group="javaJUnit">
+  <template name="utilTest" value="@org.junit.jupiter.api.Test&#10;@org.junit.jupiter.api.DisplayName(&quot;should throw illegal state exception when initialized&quot;)&#10;void shouldThrowIllegalStateExceptionWhenInitialized() {&#10;    var constructor = $CLASS_NAME$.class.getDeclaredConstructors()[0];&#10;    constructor.setAccessible(true);&#10;    try {&#10;        constructor.newInstance();&#10;    } catch (IllegalStateException | InstantiationException | IllegalAccessException |&#10;             java.lang.reflect.InvocationTargetException exception) {&#10;        org.assertj.core.api.Assertions.assertThat(exception.getCause().getClass()).isEqualTo(IllegalStateException.class);&#10;        org.assertj.core.api.Assertions.assertThat(exception.getCause().getMessage()).isEqualTo(&quot;Utility class&quot;);&#10;    }&#10;}&#10;" description="Create a new JUnit test for private constructor" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="CLASS_NAME" expression="substringBefore(className(), &quot;Test&quot;)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="test" value="@org.junit.jupiter.api.Test&#10;@org.junit.jupiter.api.DisplayName(&quot;$DISPLAY_NAME$&quot;)&#10;void $METHOD_NAME$() {&#10;    $END$&#10;    $BODY$&#10;}" description="Create a new JUnit test that fails" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="DISPLAY_NAME" expression="" defaultValue="&quot;Display name for the test method&quot;" alwaysStopAt="true" />
+    <variable name="METHOD_NAME" expression="camelCase(DISPLAY_NAME)" defaultValue="&quot;mehodName&quot;" alwaysStopAt="true" />
+    <variable name="BODY" expression="" defaultValue="&quot;org.junit.jupiter.api.Assertions.fail(\&quot;Not implemented\&quot;);&quot;" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="tempDirPath" value="@org.junit.jupiter.api.io.TempDir&#10;    private java.nio.file.Path path;&#10;&#10;    @org.junit.jupiter.api.Test&#10;    @org.junit.jupiter.api.DisplayName(&quot;test path temp dir&quot;)&#10;    void testPathTempDir() throws java.io.IOException {&#10;        var targetPath = &quot;etc/passwd/test.txt&quot;;&#10;&#10;        var nestedFile = path.resolve(targetPath);&#10;        assertThat(nestedFile).isNotNull();&#10;&#10;        java.nio.file.Files.createDirectories(nestedFile.getParent());&#10;        assertThat(exists(nestedFile)).isFalse();&#10;&#10;        java.nio.file.Files.write(nestedFile, &quot;test&quot;.getBytes());&#10;        assertThat(size(nestedFile)).isGreaterThan(0L);&#10;    }" description="JUnit @TempDir Path example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+</templateSet>

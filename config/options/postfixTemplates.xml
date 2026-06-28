@@ -1,0 +1,487 @@
+<application>
+  <component name="PostfixTemplates">
+    <template id="readLine@userDefined" key=".readLine" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.io.BufferedReader" />
+      </conditions>
+      <template name="fakeKey" value="java.io.BufferedReader reader = $EXPR$;&#10;String line;&#10;while ((line = reader.readLine()) != null) {&#10;    System.out.println(line);&#10;}&#10;$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toFile@userDefined" key=".toFile" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="new java.io.File($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toBigDecimal@userDefined3" key=".toBigDecimal" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="new java.math.BigDecimal($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toLocalDateTime@userDefined" key=".toLocalDateTime" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.util.Date" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toString@userDefined" key=".toArrayString" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="array" />
+      </conditions>
+      <template name="fakeKey" value="java.util.Arrays.toString($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toLong@userDefined" key=".toLong" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="((long) ($EXPR$))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="stream@userDefined2" key=".stream" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.util.Iterator" />
+      </conditions>
+      <template name="fakeKey" value="java.util.stream.StreamSupport.stream(java.util.Spliterators.spliteratorUnknownSize($EXPR$, Spliterator.ORDERED | Spliterator.NONNULL), false)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="mock@userDefined" key=".mock" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.mockito.Mockito.mock($EXPR$.class)$END$" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="stream@userDefined" key=".stream" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.Iterable" />
+      </conditions>
+      <template name="fakeKey" value="java.util.stream.StreamSupport.stream($EXPR$.spliterator(), false)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="assertNotThrowException@userDefined" key=".assertNotThrowException" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThatCode($EXPR$).doesNotThrowAnyException()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="last@userDefined2" key=".last" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.util.List" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.get($EXPR$.size() - 1)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toDate@userDefined" key=".toDate" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.time.LocalDate" />
+      </conditions>
+      <template name="fakeKey" value="java.util.Date.from($EXPR$.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant())$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toByte@userDefined" key=".toByte" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="Byte.parseByte($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="doNothing@userDefined" key=".doNothing" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.mockito.Mockito.doNothing().when($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toByte@userDefined2" key=".toByte" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.Number" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.byteValue()$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toChar@userDefined" key=".toChar" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="((char) ($EXPR$))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toDouble@userDefined" key=".toDouble" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="((double) ($EXPR$))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertTrue@userDefined" key=".assertTrue" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="boolean" />
+        <condition id="fqn" fqn="java.lang.Boolean" />
+      </conditions>
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isTrue()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="first@userDefined2" key=".first" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.util.List" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.get(0)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="read@userDefined" key=".read" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.nio.file.Path" />
+      </conditions>
+      <template name="fakeKey" value="String content = java.nio.file.Files.readString($EXPR$, java.nio.charset.StandardCharsets.UTF_8);&#10;System.out.println(content);$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="format@userDefined2" key=".format" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.time.LocalDate" />
+      </conditions>
+      <template name="fakeKey" value="java.time.format.DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;).format($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertEqualTo@userDefined" key=".assertEqualTo" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isEqualTo($END$)" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toBigDecimal@userDefined2" key=".toBigDecimal" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.Number" />
+      </conditions>
+      <template name="fakeKey" value="new java.math.BigDecimal($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="format@userDefined" key=".format" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.util.Date" />
+      </conditions>
+      <template name="fakeKey" value="java.text.SimpleDateFormat formatter = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss hh:mm a$END$&quot;);&#10;String formattedDateTime = formatter.format($EXPR$);" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toInt@userDefined3" key=".toInt" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="((int) ($EXPR$))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="catchException@userDefined" key=".catchException" provider="builtin.java" language-level="1.3" topmost="true">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.catchException($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="ls@userDefined" key=".ls" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.nio.file.Path" />
+      </conditions>
+      <template name="fakeKey" value="java.nio.file.Files.list($EXPR$).forEach(System.out::println)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="readLine@userDefined3" key=".readLine" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.io.InputStream" />
+      </conditions>
+      <template name="fakeKey" value="java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader($EXPR$));&#10;String line;&#10;while ((line = reader.readLine()) != null) {&#10;    System.out.println(line);&#10;}&#10;$END$&#10;" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toBigDecimal@userDefined" key=".toBigDecimal" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="new java.math.BigDecimal($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toURI@userDefined" key=".toURI" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="java.net.URI.create($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertNotBlank@userDefined" key=".assertNotBlank" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isNotBlank()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toBoolean@userDefined" key=".toBoolean" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="Boolean.parseBoolean($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toPrintWriter@userDefined" key=".toPrintWriter" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.io.File" />
+      </conditions>
+      <template name="fakeKey" value="new java.io.PrintWriter($EXPR$, java.nio.charset.StandardCharsets.UTF_8)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toJSONArray@userDefined" key=".toJSONArray" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="new org.json.JSONArray($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toInt@userDefined2" key=".toInt" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.Number" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.intValue()$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="reversed@userDefined" key=".reversed" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="new StringBuilder($EXPR$).reverse().toString()$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="verify@userDefined" key=".verify" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.mockito.Mockito.verify($EXPR$, org.mockito.Mockito.times(1))$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toJSONObject@userDefined" key=".toJSONObject" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="new org.json.JSONObject($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toShort@userDefined" key=".toShort" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="Short.parseShort($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toHttpPOST@userDefined" key=".toHttpPOST" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.net.URI" />
+      </conditions>
+      <template name="fakeKey" value="try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;        .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())&#10;        .version(java.net.http.HttpClient.Version.HTTP_2)&#10;        .connectTimeout(java.time.Duration.ofSeconds(10))&#10;        .build()) {&#10;&#10;    String json = &quot;&quot;&quot;&#10;            {&#10;              id: 101,&#10;              title: 'foo',&#10;              body: 'bar',&#10;              userId: 1&#10;            }&#10;            &quot;&quot;&quot;;&#10;&#10;    java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;            .uri($EXPR$)&#10;            .timeout(java.time.Duration.ofSeconds(10))&#10;            .header(&quot;Accept&quot;, &quot;application/json&quot;)&#10;            .POST(java.net.http.HttpRequest.BodyPublishers.ofString(json))&#10;            .build();&#10;&#10;    java.net.http.HttpResponse&lt;String&gt; response = httpClient.send(request, BodyHandlers.ofString());&#10;    System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;    System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10;} catch (java.io.IOException | InterruptedException e) {&#10;    e.printStackTrace();&#10;}&#10;$END$&#10;" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertThatNoException@userDefined" key=".assertThatNoException" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThatNoException().isThrownBy($EXPR$);$END$&#10;" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toInt@userDefined" key=".toInt" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="Integer.parseInt($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertCall@userDefined" key=".assertCall" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThatCode(() -&gt; $EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="format@userDefined4" key=".format" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.time.LocalTime" />
+      </conditions>
+      <template name="fakeKey" value="java.time.format.DateTimeFormatter.ofPattern(&quot;HH:mm:ss hh:mm a&quot;).format($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="readLine@userDefined2" key=".readLine" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.io.InputStreamReader" />
+      </conditions>
+      <template name="fakeKey" value="java.io.BufferedReader reader = new BufferedReader($EXPR$);&#10;String line;&#10;while ((line = reader.readLine()) != null) {&#10;    System.out.println(line);&#10;}&#10;$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="ls@userDefined2" key=".ls" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="java.nio.file.Path path = java.nio.file.Path.of($EXPR$);&#10;java.nio.file.Files.list(path).forEach(System.out::println);&#10;$END$&#10;" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertThat@userDefined" key=".assertThat" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toScanner@userDefined" key=".toScanner" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.nio.file.Path" />
+      </conditions>
+      <template name="fakeKey" value="new java.util.Scanner($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertNotNull@userDefined" key=".assertNotNull" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isNotNull()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toByte@userDefined3" key=".toByte" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="((byte) ($EXPR$))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toLocalDate@userDefined" key=".toLocalDate" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.util.Date" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate()$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toFloat@userDefined" key=".toFloat" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="Float.parseFloat($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="runCommand@userDefined" key=".runCommand" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="ProcessBuilder processBuilder = new ProcessBuilder();&#10;&#10;processBuilder.command(&quot;sh&quot;, &quot;-c&quot;, $EXPR$);&#10;&#10;Process process = processBuilder.start();&#10;&#10;java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(process.getInputStream()));&#10;String line;&#10;while ((line = reader.readLine()) != null) {&#10;    System.out.println(line);&#10;}&#10;&#10;int exitCode = process.waitFor();&#10;System.out.printf(&quot;\nExited with code: %d&quot;, exitCode);&#10;$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toEncodedBase64String@userDefined" key=".toEncodedBase64String" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="java.util.Base64.getEncoder().encodeToString($EXPR$.getBytes())$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="last@userDefined" key=".last" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="array" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$[$EXPR$.length -1]$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toString@userDefined3" key=".toString" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="array" />
+      </conditions>
+      <template name="fakeKey" value="new String($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toString@userDefined2" key=".toString" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="String.valueOf($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="when@userDefined" key=".when" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.mockito.Mockito.when($EXPR$).thenReturn($END$)" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="first@userDefined" key=".first" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="array" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$[0]$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="mockStatic@userDefined" key=".mockStatic" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.mockito.Mockito.mockStatic($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toShort@userDefined2" key=".toShort" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.Number" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.shortValue()$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toShort@userDefined3" key=".toShort" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="number" />
+      </conditions>
+      <template name="fakeKey" value="((short) ($EXPR$))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertNotEmpty@userDefined" key=".assertNotEmpty" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="array" />
+        <condition id="fqn" fqn="java.util.Map" />
+        <condition id="fqn" fqn="java.lang.Iterable" />
+      </conditions>
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isNotEmpty()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toDate@userDefined2" key=".toDate" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.time.LocalTime" />
+      </conditions>
+      <template name="fakeKey" value="java.util.Date.from(now.atDate(java.time.LocalDate.now()).atZone(java.time.ZoneId.systemDefault()).toInstant())" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertNull@userDefined" key=".assertNull" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isNull()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toBufferedReader@userDefined" key=".toBufferedReader" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.io.InputStreamReader" />
+      </conditions>
+      <template name="fakeKey" value="new BufferedReader($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toByteArray@userDefined" key=".toByteArray" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.getBytes(java.nio.charset.StandardCharsets.UTF_8)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertFalse@userDefined" key=".assertFalse" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="boolean" />
+        <condition id="fqn" fqn="java.lang.Boolean" />
+      </conditions>
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isFalse()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="reversed@userDefined2" key=".reversed" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="array" />
+      </conditions>
+      <template name="fakeKey" value="java.util.stream.IntStream.rangeClosed(1, $EXPR$.length)&#10;                .mapToObj(i -&gt; $EXPR$[$EXPR$.length - i])&#10;                .toArray($END$[]::new)" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toInputStream@userDefined" key=".toInputStream" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="new java.io.ByteArrayInputStream($EXPR$.getBytes(java.nio.charset.StandardCharsets.UTF_8))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertEmpty@userDefined" key=".assertEmpty" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="array" />
+        <condition id="fqn" fqn="java.util.Map" />
+        <condition id="fqn" fqn="java.lang.Iterable" />
+      </conditions>
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isEmpty()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toInputStreamReader@userDefined" key=".toInputStreamReader" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.io.InputStream" />
+      </conditions>
+      <template name="fakeKey" value="new java.io.InputStreamReader($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toDecodedBase64String@userDefined" key=".toDecodedBase64String" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="new String(java.util.Base64.getDecoder().decode($EXPR$))$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="toLocalTime@userDefined" key=".toLocalTime" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.util.Date" />
+      </conditions>
+      <template name="fakeKey" value="$EXPR$.toInstant().atZone(ZoneId.systemDefault()).toLocalTime()$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertThatThrownBy@userDefined" key=".assertThatThrownBy" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="void" />
+        <condition id="non void" />
+      </conditions>
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThatThrownBy($EXPR$).isInstanceOf($END$Exception.class)" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toDate@userDefined3" key=".toDate" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.time.LocalDateTime" />
+      </conditions>
+      <template name="fakeKey" value="java.util.Date.from($EXPR$.atZone(java.time.ZoneId.systemDefault()).toInstant())$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="format@userDefined3" key=".format" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.time.LocalDateTime" />
+      </conditions>
+      <template name="fakeKey" value="java.time.format.DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss hh:mm a&quot;).format($EXPR$)$END$&#10;" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="write@userDefined" key=".write" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.nio.file.Path" />
+      </conditions>
+      <template name="fakeKey" value="java.nio.file.Files.writeString($EXPR$, &quot;$END$&quot;)" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="assertBlank@userDefined" key=".assertBlank" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.assertThat($EXPR$).isBlank()$END$" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toHttpGET@userDefined" key=".toHttpGET" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.net.URI" />
+      </conditions>
+      <template name="fakeKey" value="try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;        .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())&#10;        .version(java.net.http.HttpClient.Version.HTTP_2)&#10;        .connectTimeout(java.time.Duration.ofSeconds(10))&#10;        .build()) {&#10;&#10;    java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;            .uri($EXPR$)&#10;            .timeout(java.time.Duration.ofSeconds(10))&#10;            .header(&quot;Accept&quot;, &quot;application/json&quot;)&#10;            .GET()&#10;            .build();&#10;&#10;    java.net.http.HttpResponse&lt;String&gt; response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;    System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;    System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10;} catch (java.io.IOException | InterruptedException e) {&#10;    e.printStackTrace();&#10;}&#10;$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="catchThrowable@userDefined" key=".catchThrowable" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.assertj.core.api.Assertions.catchThrowable($EXPR$)$END$&#10;" description="" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="spy@userDefined" key=".spy" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="org.mockito.Mockito.spy($EXPR$.class)$END$" toReformat="true" toShortenFQNames="true" useStaticImport="true" />
+    </template>
+    <template id="toPath@userDefined" key=".toPath" provider="builtin.java" language-level="1.3" topmost="false">
+      <conditions>
+        <condition id="fqn" fqn="java.lang.String" />
+      </conditions>
+      <template name="fakeKey" value="java.nio.file.Path.of($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="sout@userDefined" key=".sout" provider="builtin.js" language-level="ES6" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="console.log($EXPR$)$END$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="reversedString@userDefined" key=".reversedString" provider="builtin.js" language-level="ES6" topmost="false">
+      <conditions />
+      <template name="fakeKey" value="Array.from($EXPR$).reverse().join(&quot;&quot;)$END$&#10;" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+  </component>
+</application>

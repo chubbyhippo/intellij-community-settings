@@ -1,0 +1,162 @@
+<templateSet group="javaJava">
+  <template name="log" value="private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger($CLASS_NAME$.class);" description="SLF4J logger" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="random" value="java.util.concurrent.ThreadLocalRandom.current()" description="ThreadLocalRandom.current()" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="utilClass" value="private $CLASS_NAME$() {&#10;    throw new java.lang.IllegalStateException(&quot;Utility class&quot;);&#10;}" description="Util class private constructor" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="writeFile" value="String content = &quot;$STRING_CONTENT$&quot;;&#10;java.nio.file.Path filePath = java.nio.file.Path.of(&quot;$FILE_PATH$&quot;);&#10;java.nio.file.Files.writeString(filePath, content);" description="Write content to file" toReformat="true" toShortenFQNames="true">
+    <variable name="STRING_CONTENT" expression="" defaultValue="&quot;content&quot;" alwaysStopAt="true" />
+    <variable name="FILE_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="readFile" value="java.nio.file.Path filePath = java.nio.file.Path.of(&quot;$FILE_PATH$&quot;);&#10;String content = java.nio.file.Files.readString(filePath);&#10;System.out.println(content);" description="Get string from reading text file" toReformat="true" toShortenFQNames="true">
+    <variable name="FILE_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="readFileLineByLine" value="java.nio.file.Path filePath = java.nio.file.Path.of(&quot;$FILE_PATH$&quot;);&#10;&#10;try (java.util.stream.Stream&lt;String&gt; lines = java.nio.file.Files.lines(filePath)) {&#10;    lines.forEach(System.out::println);&#10;&#10;} catch (java.io.IOException e) {&#10;    throw new RuntimeException(e);&#10;}" description="Read file line by line" toReformat="true" toShortenFQNames="true">
+    <variable name="FILE_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="writeFileBuffer" value="String content = &quot;$STRING_CONTENT$&quot;;&#10;java.nio.file.Path filePath = java.nio.file.Path.of(&quot;$FILE_PATH$&quot;);&#10;&#10;try (java.io.BufferedWriter writer = java.nio.file.Files.newBufferedWriter(filePath, java.nio.charset.StandardCharsets.UTF_8)) {&#10;    writer.write(content);&#10;} catch (java.io.IOException e) {&#10;    throw new RuntimeException(e);&#10;}" description="Write content to file using buffer" toReformat="true" toShortenFQNames="true">
+    <variable name="STRING_CONTENT" expression="" defaultValue="&quot;content&quot;" alwaysStopAt="true" />
+    <variable name="FILE_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="writeFileBufferLineByLine" value="java.nio.file.Path filePath = java.nio.file.Path.of(&quot;$FILE_PATH$&quot;);&#10;&#10;try (java.io.BufferedWriter writer = java.nio.file.Files.newBufferedWriter(filePath)) {&#10;    writer.write(&quot;First line&quot;);&#10;    writer.newLine();&#10;    writer.write(&quot;Second line&quot;);&#10;&#10;} catch (java.io.IOException e) {&#10;    throw new RuntimeException(e);&#10;}" description="Write content to file using buffer" toReformat="true" toShortenFQNames="true">
+    <variable name="FILE_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="httpGetExample" value=" String url = &quot;https://jsonplaceholder.typicode.com/posts/1&quot;;&#10;&#10; try (java.net.http.HttpClient httpClient = HttpClient.newBuilder()&#10;         .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())&#10;         .version(java.net.http.HttpClient.Version.HTTP_2)&#10;         .connectTimeout(java.time.Duration.ofSeconds(10))&#10;         .build()) {&#10;&#10;     java.net.http.HttpRequest request = HttpRequest.newBuilder()&#10;             .uri(java.net.URI.create(url))&#10;             .timeout(java.time.Duration.ofSeconds(10))&#10;             .header(&quot;Accept&quot;, &quot;application/json&quot;)&#10;             .GET()&#10;             .build();&#10;&#10;     java.net.http.HttpResponse&lt;String&gt; response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;     System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;     System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10; } catch (java.io.IOException | InterruptedException e) {&#10;     e.printStackTrace();&#10; }&#10; " description="HttpClient blocking GET Example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="httpGetAsyncExample" value="String url = &quot;https://jsonplaceholder.typicode.com/posts/1&quot;;&#10;&#10;try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;        .version(java.net.http.HttpClient.Version.HTTP_2)&#10;        .connectTimeout(java.time.Duration.ofSeconds(10))&#10;        .build()) {&#10;&#10;    java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;            .uri(java.net.URI.create(url))&#10;            .timeout(java.time.Duration.ofSeconds(10))&#10;            .header(&quot;Accept&quot;, &quot;application/json&quot;)&#10;            .GET()&#10;            .build();&#10;&#10;    java.util.concurrent.CompletableFuture&lt;java.net.http.HttpResponse&lt;String&gt;&gt; responseCompletableFuture = httpClient.sendAsync(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;    responseCompletableFuture.thenAccept(stringHttpResponse -&gt; {&#10;                System.out.println(&quot;Response status code: &quot; + stringHttpResponse.statusCode());&#10;                System.out.println(&quot;Response body: &quot; + stringHttpResponse.body());&#10;            })&#10;            .exceptionally(throwable -&gt; {&#10;                throwable.printStackTrace();&#10;                return null;&#10;            })&#10;            .join();&#10;}&#10;" description="HttpClient non-blocking GET example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="httpPostExample" value="String url = &quot;https://jsonplaceholder.typicode.com/posts&quot;;&#10;&#10;try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;        .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) &#10;        .version(java.net.http.HttpClient.Version.HTTP_2)&#10;        .connectTimeout(java.time.Duration.ofSeconds(10))&#10;        .build()) {&#10;&#10;    String json = &quot;&quot;&quot;&#10;            {&#10;              &quot;id&quot;: 101,&#10;              &quot;title&quot;: &quot;foo&quot;,&#10;              &quot;body&quot;: &quot;bar&quot;,&#10;              &quot;userId&quot;: 1&#10;            }&#10;            &quot;&quot;&quot;;&#10;&#10;    java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;            .uri(java.net.URI.create(url))&#10;            .timeout(java.time.Duration.ofSeconds(10))&#10;            .header(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;)&#10;            .POST(java.net.http.HttpRequest.BodyPublishers.ofString(json))&#10;            .build();&#10;&#10;    java.net.http.HttpResponse&lt;String&gt; response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;    System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;    System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10;} catch (java.io.IOException | InterruptedException e) {&#10;    e.printStackTrace();&#10;}&#10;" description="Httpclient blocking POST example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="httpPutExample" value="String url = &quot;https://jsonplaceholder.typicode.com/posts/1&quot;;&#10;&#10;try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;        .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())&#10;        .version(java.net.http.HttpClient.Version.HTTP_2)&#10;        .connectTimeout(java.time.Duration.ofSeconds(10))&#10;        .build()) {&#10;&#10;    String json = &quot;&quot;&quot;&#10;            {&#10;              &quot;id&quot;: 101,&#10;              &quot;title&quot;: &quot;foo&quot;,&#10;              &quot;body&quot;: &quot;bar&quot;,&#10;              &quot;userId&quot;: 1&#10;            }&#10;            &quot;&quot;&quot;;&#10;&#10;    java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;            .uri(java.net.URI.create(url))&#10;            .timeout(java.time.Duration.ofSeconds(10))&#10;            .header(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;)&#10;            .PUT(java.net.http.HttpRequest.BodyPublishers.ofString(json))&#10;            .build();&#10;&#10;    java.net.http.HttpResponse&lt;String&gt; response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;    System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;    System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10;} catch (java.io.IOException | InterruptedException e) {&#10;    e.printStackTrace();&#10;}&#10;" description="Httpclient blocking PUT example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="httpPatchExample" value="String url = &quot;https://jsonplaceholder.typicode.com/posts/1&quot;;&#10;&#10;try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;        .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) &#10;        .version(java.net.http.HttpClient.Version.HTTP_2)&#10;        .connectTimeout(java.time.Duration.ofSeconds(10))&#10;        .build()) {&#10;&#10;    String json = &quot;&quot;&quot;&#10;            {&#10;              &quot;title&quot;: &quot;foo&quot;&#10;            }&#10;            &quot;&quot;&quot;;&#10;&#10;    java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;            .uri(java.net.URI.create(url))&#10;            .timeout(java.time.Duration.ofSeconds(10))&#10;            .header(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;)&#10;            .method(&quot;PATCH&quot;, java.net.http.HttpRequest.BodyPublishers.ofString(json))&#10;            .build();&#10;&#10;    java.net.http.HttpResponse&lt;String&gt; response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;    System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;    System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10;} catch (java.io.IOException | InterruptedException e) {&#10;    e.printStackTrace();&#10;}&#10;" description="HttpClient blocking PATCH example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="httpDeleteExample" value="String url = &quot;https://jsonplaceholder.typicode.com/posts/1&quot;;&#10;&#10;try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;        .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())&#10;        .version(java.net.http.HttpClient.Version.HTTP_2)&#10;        .connectTimeout(java.time.Duration.ofSeconds(10))&#10;        .build()) {&#10;&#10;    java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;            .uri(java.net.URI.create(url))&#10;            .timeout(java.time.Duration.ofSeconds(10))&#10;            .DELETE()&#10;            .build();&#10;&#10;    java.net.http.HttpResponse&lt;String&gt; response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;    System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;    System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10;} catch (java.io.IOException | InterruptedException e) {&#10;    e.printStackTrace();&#10;}&#10;" description="HttpClient blocking DELETE" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="webSocket" value="try (java.net.http.HttpClient client = java.net.http.HttpClient.newBuilder().build()) {&#10;&#10;    java.net.URI uri = java.net.URI.create(&quot;wss://echo.websocket.events&quot;);&#10;&#10;    java.net.http.WebSocket webSocket = client.newWebSocketBuilder()&#10;            .buildAsync(uri,&#10;                    new java.net.http.WebSocket.Listener() {&#10;                        @Override&#10;                        public void onOpen(java.net.http.WebSocket webSocket) {&#10;                            System.out.println(&quot;Connected: &quot; + webSocket);&#10;                            java.net.http.WebSocket.Listener.super.onOpen(webSocket);&#10;                        }&#10;&#10;                        @Override&#10;                        public java.util.concurrent.CompletionStage&lt;?&gt; onText(java.net.http.WebSocket webSocket, CharSequence data, boolean last) {&#10;                            System.out.println(&quot;Received: &quot; + data);&#10;                            return java.net.http.WebSocket.Listener.super.onText(webSocket, data, last);&#10;                        }&#10;&#10;                        @Override&#10;                        public java.util.concurrent.CompletionStage&lt;?&gt; onBinary(java.net.http.WebSocket webSocket, java.nio.ByteBuffer data, boolean last) {&#10;                            System.out.println(&quot;onBinary Received: &quot; + data.toString());&#10;                            return java.net.http.WebSocket.Listener.super.onBinary(webSocket, data, last);&#10;                        }&#10;&#10;                        @Override&#10;                        public java.util.concurrent.CompletionStage&lt;?&gt; onPing(java.net.http.WebSocket webSocket, java.nio.ByteBuffer message) {&#10;                            System.out.println(&quot;onPing Received: &quot; + message.toString());&#10;                            return java.net.http.WebSocket.Listener.super.onPing(webSocket, message);&#10;                        }&#10;&#10;                        @Override&#10;                        public java.util.concurrent.CompletionStage&lt;?&gt; onPong(java.net.http.WebSocket webSocket, java.nio.ByteBuffer message) {&#10;                            System.out.println(&quot;onPong Received: &quot; + message.toString());&#10;                            return java.net.http.WebSocket.Listener.super.onPong(webSocket, message);&#10;                        }&#10;&#10;                        @Override&#10;                        public java.util.concurrent.CompletionStage&lt;?&gt; onClose(java.net.http.WebSocket webSocket, int statusCode, String reason) {&#10;                            System.out.println(&quot;Closed: &quot; + webSocket + &quot; with statusCode: &quot; + statusCode + &quot;, reason: &quot; + reason);&#10;                            return java.net.http.WebSocket.Listener.super.onClose(webSocket, statusCode, reason);&#10;                        }&#10;&#10;                        @Override&#10;                        public void onError(java.net.http.WebSocket webSocket, Throwable error) {&#10;                            System.err.println(&quot;Error: &quot; + error.getMessage());&#10;                            java.net.http.WebSocket.Listener.super.onError(webSocket, error);&#10;                        }&#10;                    })&#10;            .join();&#10;&#10;    webSocket.sendText(&quot;Hello, world!&quot;, true);&#10;    webSocket.sendClose(java.net.http.WebSocket.NORMAL_CLOSURE, &quot;Goodbye, world!&quot;);&#10;&#10;}" description="WebSocket client" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="httpServerExample" value="int port = 8080;&#10;&#10;try {&#10;    com.sun.net.httpserver.HttpServer server = com.sun.net.httpserver.HttpServer.create(new java.net.InetSocketAddress(port), 0);&#10;&#10;    server.setExecutor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor());&#10;&#10;    server.createContext(&quot;/&quot;, exchange -&gt; {&#10;        String response = &quot;Hello World!&quot;;&#10;        exchange.sendResponseHeaders(200, response.getBytes().length);&#10;        exchange.getResponseBody().write(response.getBytes());&#10;        exchange.close();&#10;    });&#10;&#10;    server.start();&#10;&#10;    System.out.println(&quot;Server started on port &quot; + port);&#10;&#10;} catch (java.io.IOException e) {&#10;    throw new RuntimeException(e);&#10;}&#10;" description="Simple HTTP server example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="semaphoreExample" value="final int MAX_CONCURRENT_THREADS = 2;&#10;final java.util.concurrent.Semaphore semaphore = new java.util.concurrent.Semaphore(MAX_CONCURRENT_THREADS, true);&#10;&#10;try (var executor = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {&#10;&#10;    for (int i = 0; i &lt; 10; i++) {&#10;        final int taskId = i;&#10;        executor.submit(() -&gt; {&#10;            try {&#10;                semaphore.acquire();&#10;                System.out.println(&quot;Task &quot; + taskId + &quot; is acquiring the semaphore. thread id:&quot; + Thread.currentThread().threadId());&#10;                Thread.sleep(2000);&#10;                System.out.println(&quot;Task &quot; + taskId + &quot; is releasing the semaphore. thread id:&quot; + Thread.currentThread().threadId());&#10;            } catch (InterruptedException e) {&#10;                Thread.currentThread().interrupt();&#10;                System.err.println(&quot;Task &quot; + taskId + &quot; was interrupted.&quot;);&#10;            } finally {&#10;                semaphore.release();&#10;            }&#10;        });&#10;    }&#10;    &#10;}&#10;" description="Semaphore example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="semaphoreTimeLimitExample" value=" final int MAX_CONCURRENT_THREADS = 2;&#10; final java.util.concurrent.Semaphore semaphore = new java.util.concurrent.Semaphore(MAX_CONCURRENT_THREADS, true);&#10;&#10; try (var executor = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {&#10;&#10;     for (int i = 0; i &lt; 10; i++) {&#10;         final int taskId = i;&#10;         executor.submit(() -&gt; {&#10;             try {&#10;                 if (semaphore.tryAcquire(4000, java.util.concurrent.TimeUnit.MILLISECONDS)) {&#10;                     &#10;                     System.out.println(&quot;Task &quot; + taskId + &quot; is acquiring the semaphore. thread id:&quot; + Thread.currentThread().threadId());&#10;                     Thread.sleep(1000);&#10;                     System.out.println(&quot;Task &quot; + taskId + &quot; is releasing the semaphore. thread id:&quot; + Thread.currentThread().threadId());&#10;                     &#10;                 } else {&#10;                     System.out.println(&quot;Task &quot; + taskId + &quot; was not able to acquire the semaphore.&quot;);&#10;                 }&#10;                 &#10;             } catch (InterruptedException e) {&#10;                 Thread.currentThread().interrupt();&#10;                 System.err.println(&quot;Task &quot; + taskId + &quot; was interrupted.&quot;);&#10;             } finally {&#10;                 &#10;                 int availablePermits = semaphore.availablePermits();&#10;                 System.out.println(&quot;Semaphore available permits: &quot; + availablePermits);&#10;                 &#10;                 if (availablePermits &lt; MAX_CONCURRENT_THREADS) {&#10;                     semaphore.release();&#10;                 }&#10;             }&#10;         });&#10;     }&#10;&#10; }&#10;" description="Semaphore with time limit example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="resourcesPrintFiles" value=" java.nio.file.Path path = java.nio.file.Path.of(ClassLoader.getSystemResource(&quot;&quot;).toURI());&#10; try (java.util.stream.Stream&lt;java.nio.file.Path&gt; paths = java.nio.file.Files.walk(path)) {&#10;     paths.filter(java.nio.file.Files::isRegularFile)&#10;             .forEach(System.out::println);&#10;} " description="Print paths in resources" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="tcpServerExample" value="try (java.net.ServerSocket serverSocket = new java.net.ServerSocket(1234)) {&#10;    System.out.printf(&quot;Server is listening on port %s%n&quot;, serverSocket.getLocalPort());&#10;&#10;    while (true) {&#10;        try (java.net.Socket socket = serverSocket.accept()) {&#10;            System.out.println(&quot;New client connected&quot;);&#10;&#10;            java.io.InputStream input = socket.getInputStream();&#10;            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(input));&#10;&#10;            java.io.OutputStream output = socket.getOutputStream();&#10;            java.io.PrintWriter writer = new java.io.PrintWriter(output, true);&#10;&#10;            String clientMessage;&#10;            while ((clientMessage = reader.readLine()) != null) {&#10;                System.out.println(&quot;Received: &quot; + clientMessage);&#10;                writer.println(clientMessage); // Echo back the message&#10;            }&#10;        } catch (java.io.IOException e) {&#10;            e.printStackTrace();&#10;        }&#10;    }&#10;&#10;} catch (java.io.IOException e) {&#10;    e.printStackTrace();&#10;}&#10;" description="Simple echo TCP server example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="tcpClientExample" value="String hostname = &quot;localhost&quot;;&#10;int port = 1234;&#10;&#10;try (java.net.Socket socket = new java.net.Socket(hostname, port)) {&#10;    java.io.InputStream input = socket.getInputStream();&#10;    java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(input));&#10;&#10;    java.io.OutputStream output = socket.getOutputStream();&#10;    java.io.PrintWriter writer = new java.io.PrintWriter(output, true);&#10;&#10;    java.io.BufferedReader consoleReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));&#10;    String userInput;&#10;&#10;    System.out.println(&quot;Connected to the server. Type messages to send:&quot;);&#10;&#10;    while ((userInput = consoleReader.readLine()) != null) {&#10;        writer.println(userInput);&#10;        String echoResponse = reader.readLine();&#10;        System.out.println(&quot;Server echoed: &quot; + echoResponse);&#10;    }&#10;&#10;} catch (java.io.IOException ex) {&#10;    ex.printStackTrace();&#10;}&#10;" description="Simple echo TCP client example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="consoleReaderBufferedReaderExample" value="java.io.BufferedReader consoleReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));&#10;String userInput;&#10;System.out.print(&quot;Enter a line of text: &quot;);&#10;while ((userInput = consoleReader.readLine()) != null) {&#10;    System.out.println(&quot;userInput = &quot; + userInput);&#10;}&#10;" description="Console reader using BufferedReader example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="consoleReaderScannerExample" value=" java.util.Scanner consoleReader = new java.util.Scanner(System.in);&#10; String userInput;&#10; System.out.print(&quot;Enter a line of text: &quot;);&#10; while (consoleReader.hasNextLine()) {&#10;     userInput = consoleReader.nextLine();&#10;     System.out.println(&quot;userInput = &quot; + userInput);&#10; }&#10;" description="Console reader using Scanner example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="consoleReaderConsoleExample" value="java.io.Console console = System.console();&#10;if (console == null) {&#10;    System.out.println(&quot;This code only works when run from a real console&quot;);&#10;    System.exit(1);&#10;}&#10;&#10;String username = console.readLine(&quot;Enter username: &quot;);&#10;char[] passwordChars = console.readPassword(&quot;Enter password: &quot;);&#10;String password = new String(passwordChars);&#10;&#10;System.out.println(&quot;username = &quot; + username);&#10;System.out.println(&quot;password = &quot; + password);&#10;" description="Console reader using Console example" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="loggerUtil" value="private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger($CLASS_NAME$.class.getName());" description="Java util logger" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="loggerPlatform" value="private static final System.Logger logger = System.getLogger($CLASS_NAME$.class.getName());" description="Java platform logger" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="httpGETBypassTLSSSL" value="java.lang.String url = &quot;https://jsonplaceholder.typicode.com/posts/1&quot;;&#10;&#10;        // Trust-all SSL context (INSECURE: disables certificate and hostname verification)&#10;        javax.net.ssl.TrustManager[] trustAll = new javax.net.ssl.TrustManager[]{&#10;                new javax.net.ssl.X509TrustManager() {&#10;                    @java.lang.Override&#10;                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, java.lang.String authType) {&#10;                    }&#10;&#10;                    @java.lang.Override&#10;                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, java.lang.String authType) {&#10;                    }&#10;&#10;                    @java.lang.Override&#10;                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {&#10;                        return new java.security.cert.X509Certificate[0];&#10;                    }&#10;                }&#10;        };&#10;        javax.net.ssl.SSLContext sslContext;&#10;        try {&#10;            sslContext = javax.net.ssl.SSLContext.getInstance(&quot;TLS&quot;);&#10;            sslContext.init(null, trustAll, new java.security.SecureRandom());&#10;        } catch (java.lang.Exception e) {&#10;            throw new java.lang.RuntimeException(&quot;Failed to initialize insecure SSLContext&quot;, e);&#10;        }&#10;        javax.net.ssl.SSLParameters sslParameters = new javax.net.ssl.SSLParameters();&#10;        sslParameters.setEndpointIdentificationAlgorithm(null); // disables hostname verification&#10;&#10;        try (java.net.http.HttpClient httpClient = java.net.http.HttpClient.newBuilder()&#10;                .executor(java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())&#10;                .version(java.net.http.HttpClient.Version.HTTP_2)&#10;                .connectTimeout(java.time.Duration.ofSeconds(10))&#10;                .sslContext(sslContext)&#10;                .sslParameters(sslParameters)&#10;                .build()) {&#10;&#10;            java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()&#10;                    .uri(java.net.URI.create(url))&#10;                    .timeout(java.time.Duration.ofSeconds(10))&#10;                    .header(&quot;Accept&quot;, &quot;application/json&quot;)&#10;                    .GET()&#10;                    .build();&#10;&#10;            java.net.http.HttpResponse&lt;java.lang.String&gt; response = httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());&#10;            java.lang.System.out.println(&quot;Response status code: &quot; + response.statusCode());&#10;            java.lang.System.out.println(&quot;Response body: &quot; + response.body());&#10;&#10;        } catch (java.io.IOException | java.lang.InterruptedException e) {&#10;            e.printStackTrace();&#10;        }" description="http get bypassing tls/ssl" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="scannerExample" value="java.util.Scanner consoleReader = new java.util.Scanner(java.lang.System.in);&#10;        java.lang.String userInput;&#10;        java.lang.System.out.print(&quot;Enter a line of text: &quot;);&#10;        while (consoleReader.hasNextLine()) {&#10;            userInput = consoleReader.nextLine();&#10;            java.lang.System.out.println(&quot;userInput = &quot; + userInput);&#10;        }" description="Scanner example" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mime" value="java.nio.file.Files.probeContentType(java.nio.file.Path.of(&quot;file.pdf&quot;));" description="MIME (please use apache Tika instead)" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_LANG_IO_STATEMENT" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>

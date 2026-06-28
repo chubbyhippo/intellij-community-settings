@@ -234,9 +234,10 @@ map <leader>ji <action>(QuickImplementations)
 " Keep easymotion from claiming <leader><leader> (bound to alternate-file above)
 let g:EasyMotion_do_mapping=0
 set easymotion
-" Normal mode: s/S jump with EasyMotion 2-char search
-nmap s <Plug>(easymotion-bd-f2)
-nmap S <Plug>(easymotion-bd-jk)
+" init.el meow parity: S = avy-goto-char-timer (2-char jump), Q = avy-goto-line
+" (lowercase s is meow-kill / cut — see the Meow section at the bottom)
+nmap S <Plug>(easymotion-bd-f2)
+nmap Q <Plug>(easymotion-bd-jk)
 
 " Change keymap
 map <leader>k <action>(ChangeKeymap)
@@ -396,8 +397,95 @@ map <leader>N <action>(Educational.NextTask)
 map <leader>P <action>(Educational.PreviousTask)
 map <leader>R <action>(Educational.RefreshTask)
 
-" Meow
+" ============================================================================
+" Meow-style selection-first editing (mirrors the Emacs init.el meow QWERTY)
+" ----------------------------------------------------------------------------
+" The meow model (Kakoune-like): SELECT first, then ACT.
+"   * selecting motions (w W e E b B f t x) enter Visual with a selection
+"   * H J K L extend the selection; h j k l collapse it and move
+"   * action keys work on the selection, or on the char under the cursor:
+"       s = kill/cut   d = delete (black hole)   c = change
+"       y = copy       p = paste                 r = replace with clipboard
+"   * there are therefore NO d/c/y operators: no dd, cw, diw, yy.
+"     to act on a whole line: x (select line) then s / d / c / y.
+" Kept as plain Vim on purpose: . repeat, m/' marks, v manual visual, the
+" g/z prefixes (gg, gd, zz...), n/N search, u undo, and q macros. meow-quit
+" lives on <leader>q / <leader>wq; avy jumps are on S / Q (see above).
+
+" --- lowercase h j k l: move, dropping the selection ---
+xnoremap h <Esc>h
+xnoremap j <Esc>j
+xnoremap k <Esc>k
+xnoremap l <Esc>l
+
+" --- uppercase H J K L: start / extend a selection ---
+nnoremap H vh
+nnoremap J vj
+nnoremap K vk
+nnoremap L vl
+xnoremap H h
+xnoremap J j
+xnoremap K k
+xnoremap L l
+
+" --- selecting motions: enter Visual with a selection ---
+" word / WORD under the cursor
+nnoremap w viw
+xnoremap w <Esc>viw
+nnoremap W viW
+xnoremap W <Esc>viW
+" to the end of the next word / WORD
 nnoremap e eviw
-vnoremap e <esc>eviw
+xnoremap e <Esc>eviw
+nnoremap E EviW
+xnoremap E <Esc>EviW
+" back a word / WORD
 nnoremap b bviwo
-vnoremap b <esc>bviwo
+xnoremap b <Esc>bviwo
+nnoremap B BviWo
+xnoremap B <Esc>BviWo
+" find / till a character (selects up to it)
+nnoremap f vf
+nnoremap t vt
+nnoremap F vF
+nnoremap T vT
+" whole line; tap x again to grow the selection down a line
+nnoremap x V
+xnoremap x j
+nnoremap X G
+xnoremap X G
+" expand / shrink the selection by syntax (meow-block / meow-to-block)
+nnoremap o <action>(EditorSelectWord)
+xnoremap o <action>(EditorSelectWord)
+nnoremap O <action>(EditorUnSelectWord)
+xnoremap O <action>(EditorUnSelectWord)
+" reverse the selection (swap its active end)
+xnoremap ; o
+
+" --- insert around the selection / open lines ---
+" I / A open a line above / below (meow-open-above / meow-open-below)
+nnoremap I O
+nnoremap A o
+" in Visual, i / a drop in at the start / end of the selection
+xnoremap i <Esc>`<i
+xnoremap a <Esc>`>a
+xnoremap I <Esc>O
+xnoremap A <Esc>o
+
+" --- act on the selection (or the char under the cursor) ---
+" kill / cut to the clipboard
+nnoremap s x
+xnoremap s d
+" delete without touching the clipboard (black hole register)
+nnoremap d "_x
+nnoremap D "_X
+xnoremap d "_d
+xnoremap D "_d
+" change
+nnoremap c cl
+" copy
+nnoremap y yl
+" replace the selection with the clipboard, leaving the clipboard intact
+xnoremap r "_dP
+" redo (u stays undo)
+nnoremap U <C-r>

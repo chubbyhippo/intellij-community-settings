@@ -5,3 +5,40 @@
 ----
 curl {raw_ideavimrc_url}/.ideavimrc -o ~/.ideavimrc
 ----
+
+== Meow-style editing
+
+Movement and editing mirror the Emacs `init.el` meow QWERTY layout: a
+selection-first (Kakoune-like) model where you *select first, then act*. There
+are no `d`/`c`/`y` operators (no `dd`, `cw`, `diw`, `yy`) — act on a whole line
+with `x` (select line) then `s`/`d`/`c`/`y`.
+
+[cols="1,3",options="header"]
+|===
+| Key | Action
+
+| `h` `j` `k` `l` | Move, dropping the selection
+| `H` `J` `K` `L` | Start / extend the selection
+| `w` `W`         | Select word / WORD under the cursor
+| `e` `E`         | Select to the end of the next word / WORD
+| `b` `B`         | Select back a word / WORD
+| `f` `t` (`F` `T`) | Select up to / till a character (backwards)
+| `x`             | Select the line (tap again to grow downward)
+| `X`             | Go to line (`{count}X`)
+| `o` `O`         | Expand / shrink the selection by syntax (meow-block)
+| `;`             | Reverse the selection (swap its active end)
+| `i` `a`         | Insert at the start / end of the selection
+| `I` `A`         | Open a line above / below
+| `s`             | Kill / cut to the clipboard
+| `d` `D`         | Delete forward / backward (black hole — keeps the clipboard)
+| `c`             | Change
+| `y`             | Copy
+| `p`             | Paste
+| `r`             | Replace the selection with the clipboard
+| `u` `U`         | Undo / redo
+| `S` `Q`         | Avy jumps: `S` to any 2 chars, `Q` to a line
+|===
+
+Kept as plain Vim: `.` repeat, `m`/`'` marks, `v` manual visual, the `g`/`z`
+prefixes (`gg`, `gd`, `zz`...), `n`/`N` search, and `q` macros. The leader is
+`<Space>` (also `Alt-m`); meow-quit lives on `<leader>q` / `<leader>wq`.

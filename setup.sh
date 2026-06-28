@@ -23,6 +23,10 @@ for config_path in \
     curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/options/projectView.xml" -o "$config_path/options/projectView.xml"
     curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/options/ui-datetime.xml" -o "$config_path/options/ui-datetime.xml"
     curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/options/ui.lnf.xml" -o "$config_path/options/ui.lnf.xml"
+    mkdir -p "$config_path/options/mac"
+    curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/options/mac/keymap.xml" -o "$config_path/options/mac/keymap.xml"
+    mkdir -p "$config_path/options/windows"
+    curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/options/windows/keymap.xml" -o "$config_path/options/windows/keymap.xml"
 
     # install templates
     mkdir -p "$config_path/templates"

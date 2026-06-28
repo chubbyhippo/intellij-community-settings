@@ -19,9 +19,9 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 
 | `h` `j` `k` `l` | Move, dropping the selection
 | `H` `J` `K` `L` | Start / extend the selection
-| `w` `W`         | Select word / WORD under the cursor
-| `e` `E`         | Select the next word / WORD; in Visual, grow the selection right (`e e e`)
-| `b` `B`         | Select the prev word / WORD; in Visual, grow the selection left (`b b b`)
+| `w` `W`         | Select word / WORD under the cursor (and arm grow mode)
+| `e` `E`         | Bare `e` steps to the next word; after `w`, `e e` grows the mark right
+| `b` `B`         | Bare `b` steps to the prev word; after `w`, `b b` grows the mark left
 | `f` `t` (`F` `T`) | Select up to / till a character (backwards)
 | `x`             | Select the line; tap to grow down (after `;`, grows up)
 | `X`             | Go to line (`{count}X`)

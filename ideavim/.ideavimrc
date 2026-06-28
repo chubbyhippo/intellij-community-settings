@@ -408,34 +408,49 @@ map <leader>R <action>(Educational.RefreshTask)
 " Emacs C-/ stack). Emacs chords (C-a/e/k/y/w/d, C-x..., C-s, C-space, M-x)
 " still work everywhere — they are routed to the IDE up top.
 
-" e/b expand the selection in Visual (meow-style): e/E grow right, b/B grow
-" left, a word per press, and they repeat. These read the live cursor vs the
-" anchor (line/col "v") and flip the active end only when needed, so even
-" w-then-b grows left. They only READ state, so they survive IdeaVim's <expr>
-" sandbox (unlike a flag, which it discards).
-function! GrowRight()
-  if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
-    return "oe"
+" Word selection like meow: a BARE e/b STEPS to the next/prev word, but after
+" w (which 'arms' grow mode) e/b GROW the selection. g:wsel is the arm flag.
+" It is WRITTEN by the normal-mode w/e/b maps with :let (a real command that
+" persists) and only READ in these <expr> funcs — reads survive IdeaVim's
+" <expr> sandbox, writes don't, so the flag is never set from inside here.
+" When growing, line/col "v" gives the anchor so we flip the active end
+" (prepend o) only when needed, so w-then-b grows left and repeats.
+let g:wsel = 0
+function! VWordE()
+  if g:wsel
+    if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
+      return "oe"
+    endif
+    return "e"
   endif
-  return "e"
+  return "\<Esc>eviw"
 endfunction
-function! GrowRightW()
-  if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
-    return "oE"
+function! VWordEW()
+  if g:wsel
+    if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
+      return "oE"
+    endif
+    return "E"
   endif
-  return "E"
+  return "\<Esc>EviW"
 endfunction
-function! GrowLeft()
-  if line(".") > line("v") || (line(".") == line("v") && col(".") > col("v"))
-    return "ob"
+function! VWordB()
+  if g:wsel
+    if line(".") > line("v") || (line(".") == line("v") && col(".") > col("v"))
+      return "ob"
+    endif
+    return "b"
   endif
-  return "b"
+  return "\<Esc>bviwo"
 endfunction
-function! GrowLeftW()
-  if line(".") > line("v") || (line(".") == line("v") && col(".") > col("v"))
-    return "oB"
+function! VWordBW()
+  if g:wsel
+    if line(".") > line("v") || (line(".") == line("v") && col(".") > col("v"))
+      return "oB"
+    endif
+    return "B"
   endif
-  return "B"
+  return "\<Esc>BviWo"
 endfunction
 " x grows the line selection outward: down if the active end is at/below the
 " anchor, up if it is above. So after ; (swap ends) x grows the OTHER way.
@@ -463,23 +478,21 @@ xnoremap K k
 xnoremap L l
 
 " --- selecting motions: enter Visual with a selection ---
-" word / WORD under the cursor (in Visual, w / W re-mark a single word)
-nnoremap w viw
+" w / W: mark the word / WORD and ARM grow mode (:let persists the flag)
+nnoremap w :<C-u>let g:wsel=1<CR>viw
 xnoremap w <Esc>viw
-nnoremap W viW
+nnoremap W :<C-u>let g:wsel=1<CR>viW
 xnoremap W <Esc>viW
-" e / E: select the next word / WORD; in Visual GROW the selection RIGHT,
-" repeatably (e e e keeps growing right)
-nnoremap e eviw
-xnoremap <expr> e GrowRight()
-nnoremap E EviW
-xnoremap <expr> E GrowRightW()
-" b / B: select the prev word / WORD; in Visual GROW the selection LEFT,
-" repeatably (b b b keeps growing left)
-nnoremap b bviwo
-xnoremap <expr> b GrowLeft()
-nnoremap B BviWo
-xnoremap <expr> B GrowLeftW()
+" e / E: a BARE e STEPS to the next word; after w it GROWS the selection right
+nnoremap e :<C-u>let g:wsel=0<CR>eviw
+xnoremap <expr> e VWordE()
+nnoremap E :<C-u>let g:wsel=0<CR>EviW
+xnoremap <expr> E VWordEW()
+" b / B: a BARE b STEPS to the prev word; after w it GROWS the selection left
+nnoremap b :<C-u>let g:wsel=0<CR>bviwo
+xnoremap <expr> b VWordB()
+nnoremap B :<C-u>let g:wsel=0<CR>BviWo
+xnoremap <expr> B VWordBW()
 " find / till a character (selects up to it)
 nnoremap f vf
 nnoremap t vt

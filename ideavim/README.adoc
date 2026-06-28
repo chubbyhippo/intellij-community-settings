@@ -20,8 +20,8 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `h` `j` `k` `l` | Move, dropping the selection
 | `H` `J` `K` `L` | Start / extend the selection
 | `w` `W`         | Select word / WORD under the cursor
-| `e` `E`         | Select to the end of the next word / WORD
-| `b` `B`         | Select back a word / WORD
+| `e` `E`         | Select to the end of the next word / WORD; in Visual, grow the selection right a word
+| `b` `B`         | Select back a word / WORD; in Visual, grow the selection left a word
 | `f` `t` (`F` `T`) | Select up to / till a character (backwards)
 | `x`             | Select the line (tap again to grow downward)
 | `X`             | Go to line (`{count}X`)

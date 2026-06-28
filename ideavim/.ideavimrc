@@ -430,16 +430,19 @@ nnoremap w viw
 xnoremap w <Esc>viw
 nnoremap W viW
 xnoremap W <Esc>viW
-" to the end of the next word / WORD
+" e / E: select to the end of the next word / WORD. In Visual, GROW the
+" selection rightward a word at a time, keeping the left end anchored
+" (re-anchored from the `< / `> marks so it works first press and repeats).
 nnoremap e eviw
-xnoremap e <Esc>eviw
+xnoremap e <Esc>`>ev`<
 nnoremap E EviW
-xnoremap E <Esc>EviW
-" back a word / WORD
+xnoremap E <Esc>`>Ev`<
+" b / B: select back a word / WORD. In Visual, GROW leftward a word at a
+" time, keeping the right end anchored.
 nnoremap b bviwo
-xnoremap b <Esc>bviwo
+xnoremap b <Esc>`<bv`>
 nnoremap B BviWo
-xnoremap B <Esc>BviWo
+xnoremap B <Esc>`<Bv`>
 " find / till a character (selects up to it)
 nnoremap f vf
 nnoremap t vt

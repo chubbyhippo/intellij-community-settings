@@ -498,6 +498,7 @@ nnoremap c cl
 nnoremap y yl
 " replace the selection with the clipboard, leaving the clipboard intact
 xnoremap r "_dP
-" undo / redo via the IDE (shared with the Emacs C-/ undo stack)
-nnoremap u <action>($Undo)
-nnoremap U <action>($Redo)
+" redo on U; u stays IdeaVim's native undo. Both already run on the IDE's
+" UndoManager (the same stack as Emacs C-/), so DON'T use <action>($Undo/$Redo)
+" here — those fire with no editor in their data context and silently no-op.
+nnoremap U <C-r>

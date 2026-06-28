@@ -38,28 +38,34 @@ let g:WhichKeyDesc_v = "<leader>v Vcs..."
 
 " Control-key handler routing: whether keys go to IDE or Vim
 " a - all modes, n - normal, i - insert, v - visual
+" I use the Emacs keymap in IntelliJ, so hand every Emacs editing chord to the
+" IDE in all modes. Only C-[ stays with Vim, as the way back to normal mode.
 sethandler <c-a> a:ide
 sethandler <c-b> a:ide
-sethandler <c-c> i-v:vim
-sethandler <c-d> i:ide
+sethandler <c-c> a:ide
+sethandler <c-d> a:ide
 sethandler <c-e> a:ide
 sethandler <c-f> a:ide
-sethandler <c-h> n:vim
-sethandler <c-i> a:vim
-sethandler <c-j> n:vim
-sethandler <c-k> n:vim
+sethandler <c-g> a:ide
+sethandler <c-h> a:ide
+sethandler <c-i> a:ide
+sethandler <c-j> a:ide
+sethandler <c-k> a:ide
 sethandler <c-l> a:ide
 sethandler <c-m> a:ide
-sethandler <c-n> n:vim
-sethandler <c-o> a:vim
-sethandler <c-p> n:vim
-sethandler <c-r> a:vim
-sethandler <c-u> a:vim
-sethandler <c-v> a:vim
+sethandler <c-n> a:ide
+sethandler <c-o> a:ide
+sethandler <c-p> a:ide
+sethandler <c-r> a:ide
+sethandler <c-s> a:ide
+sethandler <c-u> a:ide
+sethandler <c-v> a:ide
 sethandler <c-w> a:ide
-sethandler <c-x> a:vim
+sethandler <c-x> a:ide
+sethandler <c-y> a:ide
+sethandler <c-/> a:ide
+sethandler <c-space> a:ide
 sethandler <c-[> a:vim
-sethandler <c-s-n> a:vim
 
 " Space is the leader key
 let mapleader=" "
@@ -67,21 +73,9 @@ let mapleader=" "
 " M-m behaves like <leader> (must be map, not noremap)
 map <A-m> <Space>
 
-" Insert mode: Ctrl-j/k move cursor up/down (IDE-like)
-imap <c-j> <down>
-imap <c-k> <up>
-
-" Keep cursor centered when moving between search results / half-page scrolls
-map n nzzzv
-map N Nzzzv
-map <c-d> <c-d>zz
-map <c-u> <c-u>zz
-
-" Window navigation with Ctrl-h/j/k/l
-map <c-h> <c-w>h
-map <c-l> <c-w>l
-map <c-k> <c-w>k
-map <c-j> <c-w>j
+" meow-search: n / N repeat the IDE search (Emacs C-s starts it; v opens Find)
+nnoremap n <action>(FindNext)
+nnoremap N <action>(FindPrevious)
 
 " Resize editor splits with - = _ +
 map - <action>(StretchSplitToBottom)
@@ -408,9 +402,11 @@ map <leader>R <action>(Educational.RefreshTask)
 "       y = copy       p = paste                 r = replace with clipboard
 "   * there are therefore NO d/c/y operators: no dd, cw, diw, yy.
 "     to act on a whole line: x (select line) then s / d / c / y.
-" Kept as plain Vim on purpose: . repeat, m/' marks, v manual visual, the
-" g/z prefixes (gg, gd, zz...), n/N search, u undo, and q macros. meow-quit
-" lives on <leader>q / <leader>wq; avy jumps are on S / Q (see above).
+" This follows init.el's meow keys, not vanilla Vim: q quits, m joins, g
+" cancels the selection, v / n / N drive search, , / . grab the inner / bounds
+" of a thing, ' repeats, and u / U are the IDE's undo / redo (shared with the
+" Emacs C-/ stack). Emacs chords (C-a/e/k/y/w/d, C-x..., C-s, C-space, M-x)
+" still work everywhere — they are routed to the IDE up top.
 
 " --- lowercase h j k l: move, dropping the selection ---
 xnoremap h <Esc>h
@@ -461,6 +457,21 @@ nnoremap O <action>(EditorUnSelectWord)
 xnoremap O <action>(EditorUnSelectWord)
 " reverse the selection (swap its active end)
 xnoremap ; o
+" inner / bounds of a thing: , or . then a text-object char, e.g. ,( or .(
+nnoremap , vi
+nnoremap . va
+" ' repeats the last change (meow keeps . for bounds, above)
+nnoremap ' .
+" cancel the selection (meow-cancel-selection)
+nnoremap g <Esc>
+xnoremap g <Esc>
+" join lines (meow-join)
+nnoremap m J
+xnoremap m J
+" quit the editor (meow-quit)
+nnoremap q :q<cr>
+" visit: open the IDE search; n / N then walk the matches (meow-visit)
+nnoremap v <action>(Find)
 
 " --- insert around the selection / open lines ---
 " I / A open a line above / below (meow-open-above / meow-open-below)
@@ -487,5 +498,6 @@ nnoremap c cl
 nnoremap y yl
 " replace the selection with the clipboard, leaving the clipboard intact
 xnoremap r "_dP
-" redo (u stays undo)
-nnoremap U <C-r>
+" undo / redo via the IDE (shared with the Emacs C-/ undo stack)
+nnoremap u <action>($Undo)
+nnoremap U <action>($Redo)

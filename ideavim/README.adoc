@@ -27,18 +27,28 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `X`             | Go to line (`{count}X`)
 | `o` `O`         | Expand / shrink the selection by syntax (meow-block)
 | `;`             | Reverse the selection (swap its active end)
+| `,` `.`         | Select the inner / bounds of a thing (then a char, e.g. `,(`)
 | `i` `a`         | Insert at the start / end of the selection
 | `I` `A`         | Open a line above / below
 | `s`             | Kill / cut to the clipboard
 | `d` `D`         | Delete forward / backward (black hole — keeps the clipboard)
 | `c`             | Change
-| `y`             | Copy
-| `p`             | Paste
+| `y` `p`         | Copy / paste
 | `r`             | Replace the selection with the clipboard
-| `u` `U`         | Undo / redo
+| `m`             | Join lines
+| `g`             | Cancel the selection
+| `v`             | Visit — open Find; `n` / `N` then walk the matches
+| `q`             | Quit the editor
+| `u` `U`         | Undo / redo (the IDE's, shared with Emacs `C-/`)
+| `'`             | Repeat the last change
 | `S` `Q`         | Avy jumps: `S` to any 2 chars, `Q` to a line
 |===
 
-Kept as plain Vim: `.` repeat, `m`/`'` marks, `v` manual visual, the `g`/`z`
-prefixes (`gg`, `gd`, `zz`...), `n`/`N` search, and `q` macros. The leader is
-`<Space>` (also `Alt-m`); meow-quit lives on `<leader>q` / `<leader>wq`.
+This follows `init.el`'s meow keys rather than vanilla Vim — `q`, `m`, `g`,
+`v`, `,`/`.`, `'` and `u`/`U` all take their meow meanings above. Because the
+*Emacs keymap* is used in IntelliJ, every Emacs editing chord is routed to the
+IDE and works in all modes: `C-a`/`C-e` line ends, `C-f`/`C-b`/`C-n`/`C-p`
+motion, `C-d` delete, `C-k` kill-line, `C-w`/`M-w` cut/copy, `C-y` yank,
+`C-space` set mark, `C-g` cancel, `C-s`/`C-r` search, the `C-x` prefix, and
+`M-x`. Only `C-[` stays with Vim, as the way back to normal mode. The leader is
+`<Space>` (also `Alt-m`).

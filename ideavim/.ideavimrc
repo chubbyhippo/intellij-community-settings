@@ -437,6 +437,14 @@ function! GrowLeftW()
   endif
   return "B"
 endfunction
+" x grows the line selection outward: down if the active end is at/below the
+" anchor, up if it is above. So after ; (swap ends) x grows the OTHER way.
+function! GrowLine()
+  if line(".") < line("v")
+    return "k"
+  endif
+  return "j"
+endfunction
 
 " --- lowercase h j k l: move, dropping the selection ---
 xnoremap h <Esc>h
@@ -477,9 +485,9 @@ nnoremap f vf
 nnoremap t vt
 nnoremap F vF
 nnoremap T vT
-" whole line; tap x again to grow the selection down a line
+" whole line; tap x to grow the selection down a line (; then x grows up)
 nnoremap x V
-xnoremap x j
+xnoremap <expr> x GrowLine()
 nnoremap X G
 xnoremap X G
 " expand / shrink the selection by syntax (meow-block / meow-to-block)

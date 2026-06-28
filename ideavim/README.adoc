@@ -23,7 +23,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `e` `E`         | Select the next word / WORD; in Visual, grow the selection right (`e e e`)
 | `b` `B`         | Select the prev word / WORD; in Visual, grow the selection left (`b b b`)
 | `f` `t` (`F` `T`) | Select up to / till a character (backwards)
-| `x`             | Select the line (tap again to grow downward)
+| `x`             | Select the line; tap to grow down (after `;`, grows up)
 | `X`             | Go to line (`{count}X`)
 | `o` `O`         | Expand / shrink the selection by syntax (meow-block)
 | `;`             | Reverse the selection (swap its active end)

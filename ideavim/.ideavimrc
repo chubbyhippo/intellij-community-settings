@@ -408,6 +408,36 @@ map <leader>R <action>(Educational.RefreshTask)
 " Emacs C-/ stack). Emacs chords (C-a/e/k/y/w/d, C-x..., C-s, C-space, M-x)
 " still work everywhere — they are routed to the IDE up top.
 
+" e/b expand the selection in Visual (meow-style): e/E grow right, b/B grow
+" left, a word per press, and they repeat. These read the live cursor vs the
+" anchor (line/col "v") and flip the active end only when needed, so even
+" w-then-b grows left. They only READ state, so they survive IdeaVim's <expr>
+" sandbox (unlike a flag, which it discards).
+function! GrowRight()
+  if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
+    return "oe"
+  endif
+  return "e"
+endfunction
+function! GrowRightW()
+  if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
+    return "oE"
+  endif
+  return "E"
+endfunction
+function! GrowLeft()
+  if line(".") > line("v") || (line(".") == line("v") && col(".") > col("v"))
+    return "ob"
+  endif
+  return "b"
+endfunction
+function! GrowLeftW()
+  if line(".") > line("v") || (line(".") == line("v") && col(".") > col("v"))
+    return "oB"
+  endif
+  return "B"
+endfunction
+
 " --- lowercase h j k l: move, dropping the selection ---
 xnoremap h <Esc>h
 xnoremap j <Esc>j
@@ -425,24 +455,23 @@ xnoremap K k
 xnoremap L l
 
 " --- selecting motions: enter Visual with a selection ---
-" word / WORD under the cursor
+" word / WORD under the cursor (in Visual, w / W re-mark a single word)
 nnoremap w viw
 xnoremap w <Esc>viw
 nnoremap W viW
 xnoremap W <Esc>viW
-" e / E: select to the end of the next word / WORD. In Visual, GROW the
-" selection rightward a word at a time, keeping the left end anchored
-" (re-anchored from the `< / `> marks so it works first press and repeats).
+" e / E: select the next word / WORD; in Visual GROW the selection RIGHT,
+" repeatably (e e e keeps growing right)
 nnoremap e eviw
-xnoremap e <Esc>`>ev`<
+xnoremap <expr> e GrowRight()
 nnoremap E EviW
-xnoremap E <Esc>`>Ev`<
-" b / B: select back a word / WORD. In Visual, GROW leftward a word at a
-" time, keeping the right end anchored.
+xnoremap <expr> E GrowRightW()
+" b / B: select the prev word / WORD; in Visual GROW the selection LEFT,
+" repeatably (b b b keeps growing left)
 nnoremap b bviwo
-xnoremap b <Esc>`<bv`>
+xnoremap <expr> b GrowLeft()
 nnoremap B BviWo
-xnoremap B <Esc>`<Bv`>
+xnoremap <expr> B GrowLeftW()
 " find / till a character (selects up to it)
 nnoremap f vf
 nnoremap t vt

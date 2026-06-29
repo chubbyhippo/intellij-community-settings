@@ -112,7 +112,7 @@ map [e <action>(GotoPreviousError)
 " --- direct leader keys (meow-leader-define-key) ---
 " SPC b  consult-buffer   (SPC s = consult-line now lives on SPC s s — see
 " the IntelliJ <leader>s group below)
-map <leader>b   <action>(Switcher)
+map <leader>b   <action>(RecentFiles)
 
 " --- SPC 1-9 = meow-digit-argument : a count for the next command ---
 " Vim already counts when you type a number directly; these mirror Meow, where
@@ -134,7 +134,7 @@ nnoremap <leader>9 9
 " v vc-prefix        c quit         0/1/2/3 splits
 map <leader>xf  <action>(GotoFile)
 map <leader>xs  <action>(SaveAll)
-map <leader>xb  <action>(Switcher)
+map <leader>xb  <action>(RecentFiles)
 map <leader>xk  <action>(CloseContent)
 map <leader>xd  <action>(ActivateProjectToolWindow)
 map <leader>xg  <action>(ActivateVersionControlToolWindow)
@@ -150,7 +150,7 @@ map <leader>x3  <action>(SplitVertically)
 " --- SPC x p = C-x p : project.el ---
 " f find-file   b buffer   g grep   r replace   c compile
 map <leader>xpf <action>(GotoFile)
-map <leader>xpb <action>(Switcher)
+map <leader>xpb <action>(RecentFiles)
 map <leader>xpg <action>(FindInPath)
 map <leader>xpr <action>(ReplaceInPath)
 map <leader>xpc <action>(CompileProject)
@@ -162,7 +162,7 @@ map <leader>xpc <action>(CompileProject)
 map <leader>cf  <action>(GotoFile)
 map <leader>cs  <action>(SaveAll)
 map <leader>ck  <action>(CloseContent)
-map <leader>cb  <action>(Switcher)
+map <leader>cb  <action>(RecentFiles)
 map <leader>cr  <action>(FindInPath)
 map <leader>ce  <action>(EditorSelectWord)
 map <leader>ca  <action>(ActivateTODOToolWindow)

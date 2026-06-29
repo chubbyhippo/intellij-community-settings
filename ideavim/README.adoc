@@ -86,7 +86,7 @@ Emacs. The which-key popup lists each group as you type.
 
 | `x f` | `C-x C-f` find-file           | `GotoFile`
 | `x s` | `C-x C-s` save-buffer         | `SaveAll`
-| `x b` | consult-buffer                | `Switcher`
+| `x b` | consult-buffer                | `RecentFiles`
 | `x k` | kill-buffer                   | `CloseContent`
 | `x d` | `C-x d` dired                 | `ActivateProjectToolWindow`
 | `x g` | `C-x g` magit-status          | `ActivateVersionControlToolWindow`
@@ -107,7 +107,7 @@ Emacs. The which-key popup lists each group as you type.
 | Keys | Emacs | IntelliJ action
 
 | `x p f` | project-find-file | `GotoFile`
-| `x p b` | project buffer    | `Switcher`
+| `x p b` | project buffer    | `RecentFiles`
 | `x p g` | project grep      | `FindInPath`
 | `x p r` | project replace   | `ReplaceInPath`
 | `x p c` | project-compile   | `CompileProject`
@@ -122,7 +122,7 @@ Emacs. The which-key popup lists each group as you type.
 | `c f` | `C-c f` find-file             | `GotoFile`
 | `c s` | `C-c s` save-buffer           | `SaveAll`
 | `c k` | `C-c k` kill-current-buffer   | `CloseContent`
-| `c b` | `C-c b` consult-buffer        | `Switcher`
+| `c b` | `C-c b` consult-buffer        | `RecentFiles`
 | `c r` | `C-c r` consult-ripgrep       | `FindInPath`
 | `c e` | `C-c e` expreg-expand         | `EditorSelectWord`
 | `c a` | `C-c a` org-agenda            | `ActivateTODOToolWindow`
@@ -177,7 +177,7 @@ Emacs. The which-key popup lists each group as you type.
 |===
 | Keys | Action
 
-| `SPC b`    | Buffers (`consult-buffer`) → `Switcher`
+| `SPC b`    | Buffers (`consult-buffer`) → `RecentFiles`
 | `SPC s s` | Search this file (`consult-line`) → `Find`
 | `SPC <CR>` | Context actions (≈ `embark-act`) → `ShowIntentionActions`
 | `SPC SPC`  | Alternate file (`<C-^>`)
@@ -228,5 +228,5 @@ The full per-key bindings live in the `.ideavimrc` (each group is commented).
 Groups whose mnemonic prefix belongs to the Emacs/Meow scheme — buffers (`b`),
 code (`c`), mode (`m`), search (`s`), windows (`w`) — are intentionally left out;
 their features stay reachable through the groups above (mode toggles on `SPC .`
-/ `SPC t`, buffers on `SPC b` = Switcher, windows on `SPC w`) or via `SPC m x`
+/ `SPC t`, buffers on `SPC b` = RecentFiles, windows on `SPC w`) or via `SPC m x`
 (Find Action).

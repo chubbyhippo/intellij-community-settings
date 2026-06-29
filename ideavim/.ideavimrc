@@ -8,8 +8,13 @@ set ideajoin
 set ignorecase
 set smartcase
 
-" Show absolute line numbers
+" Hybrid line numbers: absolute on the cursor line, relative on the others. The
+" relative count is meow's expand guide made visible — x (select line) then a
+" digit extends the selection to the line showing that number (1-9, 0 = 10).
+" Word-wise expand (after w / e / b) has no gutter numbers; that's an IdeaVim
+" limit, not a config gap. Toggle relative off with <leader>tr.
 set number
+set relativenumber
 
 " Enable various UX plugins
 set visualbell        " Use visual bell instead of audible

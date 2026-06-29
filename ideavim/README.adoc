@@ -19,7 +19,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 
 | `h` `j` `k` `l` | Move, dropping the selection
 | `H` `J` `K` `L` | Start / extend the selection
-| `1`–`9` `0` `-` | Extend the selection by N (lines if line-wise, words if char-wise); `0` = 10, `-` back one
+| `1`–`9` `0` `-` | Extend the selection by N (lines if line-wise, words if char-wise); `0` = 10, `-` back one. Hybrid line numbers (`relativenumber`, on by default) show the line count in the gutter as meow's expand guide — press the digit you see; word-wise expand has no gutter numbers
 | `w` `W`         | Select word / WORD under the cursor (and arm grow mode)
 | `e` `E`         | Bare `e` steps to the next word; after `w`, `e e` grows the mark right
 | `b` `B`         | Bare `b` steps to the prev word; after `w`, `b b` grows the mark left

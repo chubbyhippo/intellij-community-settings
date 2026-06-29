@@ -632,9 +632,27 @@ nnoremap O <action>(EditorUnSelectWord)
 xnoremap O <action>(EditorUnSelectWord)
 " reverse the selection (swap its active end)
 xnoremap ; o
-" inner / bounds of a thing: , or . then a text-object char, e.g. ,( or .(
+" inner / bounds of a thing — , = inner, . = bounds. Native vim object chars
+" still work (,( ,) ," ,t ,w ...); these add the meow-char-thing-table letters:
+"   r round  s square  c curly  g string  p paragraph  l line  b buffer
+" (d/defun has no native IdeaVim text object, so it is omitted — use ,c / .c for
+" the enclosing { } block, and ,' for single-quoted strings.)
 nnoremap , vi
 nnoremap . va
+nnoremap ,r vi(
+nnoremap .r va(
+nnoremap ,s vi[
+nnoremap .s va[
+nnoremap ,c vi{
+nnoremap .c va{
+nnoremap ,g vi"
+nnoremap .g va"
+nnoremap ,p vip
+nnoremap .p vap
+nnoremap ,l ^vg_
+nnoremap .l V
+nnoremap ,b ggVG
+nnoremap .b ggVG
 " ' repeats the last change (meow keeps . for bounds, above)
 nnoremap ' .
 " cancel the selection (meow-cancel-selection)

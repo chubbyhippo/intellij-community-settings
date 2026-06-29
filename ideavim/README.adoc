@@ -28,7 +28,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `X`             | Go to line (`{count}X`)
 | `o` `O`         | Expand / shrink the selection by syntax (meow-block)
 | `;`             | Reverse the selection (swap its active end); flips the n / N search direction
-| `,` `.`         | Select the inner / bounds of a thing (then a char, e.g. `,(`)
+| `,` `.`         | Inner / bounds of a thing — meow letters r round · s square · c curly · g string · p paragraph · l line · b buffer (or a vim object char: `(` `"` `t` `w` …)
 | `i` `a`         | Insert at the start / end of the selection
 | `I` `A`         | Open a line above / below
 | `s`             | Kill / cut to the clipboard

@@ -36,7 +36,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `c`             | Change
 | `y` `p`         | Copy / paste
 | `r`             | Replace the selection with the clipboard
-| `m`             | Join lines
+| `m`             | meow-join: `m a` = start of text (first non-blank, `^i` = `,l i`), `m i` = end of the previous line (`kA`). Visual `m` joins selected lines (`x` / `X` then `m`)
 | `g`             | Cancel the selection
 | `z`             | Jump back through the jumplist, reselecting the word (meow-pop-selection)
 | `v`             | Visit — open Find; `n` / `N` then walk the matches

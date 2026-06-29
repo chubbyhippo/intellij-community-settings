@@ -667,8 +667,17 @@ xnoremap g <Esc>
 " (n / searches record jumps; viw restores the highlight at the landing spot)
 nnoremap z <C-o>viw
 xnoremap z <Esc><C-o>viw
-" join lines (meow-join)
-nnoremap m J
+" meow-join on m. m a / m i are literal two-key SEQUENCES mapped to the endpoints
+" of meow's join region (Vim's a / i on a cross-line whitespace selection
+" misbehave, so map the outcomes directly):
+"   m a  -> ^i   first non-blank = START OF TEXT   (= ,l i)
+"   m i  -> kA   end of the PREVIOUS line
+" With notimeout, m waits for its next key; a / i route to these, anything else
+" runs the 0viw fallback (selects the indentation) then that key. Plain mappings,
+" no functions (IdeaVim lacks match()/getline()). Visual m still joins (= J).
+nnoremap m 0viw
+nnoremap ma ^i
+nnoremap mi kA
 xnoremap m J
 " quit the editor (meow-quit)
 nnoremap q :q<cr>

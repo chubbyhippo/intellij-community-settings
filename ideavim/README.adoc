@@ -27,7 +27,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `x`             | Select the line; tap to grow down (after `;`, grows up)
 | `X`             | Go to line (`{count}X`)
 | `o` `O`         | Expand / shrink the selection by syntax (meow-block)
-| `;`             | Reverse the selection (swap its active end)
+| `;`             | Reverse the selection (swap its active end); flips the n / N search direction
 | `,` `.`         | Select the inner / bounds of a thing (then a char, e.g. `,(`)
 | `i` `a`         | Insert at the start / end of the selection
 | `I` `A`         | Open a line above / below
@@ -39,7 +39,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `m`             | Join lines
 | `g`             | Cancel the selection
 | `v`             | Visit — open Find; `n` / `N` then walk the matches
-| `n` `N`         | After `w` / `W`, jump to the next / prev occurrence of the word
+| `n` `N`         | After `w` / `W`, jump to the next / prev occurrence of the word; `;` reverses the direction
 | `q`             | Quit the editor
 | `u` `U`         | Undo / redo (the IDE's, shared with Emacs `C-/`)
 | `'`             | Repeat the last change

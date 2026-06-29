@@ -71,8 +71,22 @@ nnoremap N <action>(FindPrevious)
 " In a selection (after w / W), n / N jump to the next / prev occurrence of
 " the word under the cursor and reselect it — meow-search after meow-mark-word.
 " * / # re-derive the word each time and wrap, so no stale-pattern E486.
-xnoremap n <Esc>*viw
-xnoremap N <Esc>#viw
+" Direction follows the selection: ; (meow-reverse) flips it, so ; then n walks
+" backward and keeps going that way. <expr> funcs only READ state, never write.
+function! MeowSearchN()
+  if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
+    return "\<Esc>#viwo"
+  endif
+  return "\<Esc>*viw"
+endfunction
+function! MeowSearchP()
+  if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
+    return "\<Esc>*viwo"
+  endif
+  return "\<Esc>#viw"
+endfunction
+xnoremap <expr> n MeowSearchN()
+xnoremap <expr> N MeowSearchP()
 
 " Resize editor splits with - = _ +
 map - <action>(StretchSplitToBottom)

@@ -109,6 +109,20 @@ map [e <action>(GotoPreviousError)
 map <leader>b   <action>(Switcher)
 map <leader>s   <action>(Find)
 
+" --- SPC 1-9 = meow-digit-argument : a count for the next command ---
+" Vim already counts when you type a number directly; these mirror Meow, where
+" the leader carries the count because the normal-mode digits do meow-expand-N
+" (below). Normal mode only, e.g. SPC 3 then j = 3 lines down.
+nnoremap <leader>1 1
+nnoremap <leader>2 2
+nnoremap <leader>3 3
+nnoremap <leader>4 4
+nnoremap <leader>5 5
+nnoremap <leader>6 6
+nnoremap <leader>7 7
+nnoremap <leader>8 8
+nnoremap <leader>9 9
+
 " --- SPC x = C-x : files / buffers / windows ---
 " f find-file        s save         b buffers      k kill-buffer
 " d dired(project)   g magit(VCS)   o other-window u undo history
@@ -291,6 +305,23 @@ xnoremap H h
 xnoremap J j
 xnoremap K k
 xnoremap L l
+
+" --- 1-9 / 0 / - : meow-expand-N (extend the selection by N lines) ---
+" Meow shows numbered hints and a digit expands to the Nth; IdeaVim has no hint
+" overlay, so while a selection is active a digit extends it by that many lines
+" (x then 3 = 3 more lines), 0 = 10, and - extends upward. Normal-mode counts
+" (3w) still work, and SPC 1-9 give a count there too.
+xnoremap 1 1j
+xnoremap 2 2j
+xnoremap 3 3j
+xnoremap 4 4j
+xnoremap 5 5j
+xnoremap 6 6j
+xnoremap 7 7j
+xnoremap 8 8j
+xnoremap 9 9j
+xnoremap 0 10j
+xnoremap - k
 
 " --- selecting motions: enter Visual with a selection ---
 " w / W: mark the word / WORD and ARM grow mode (:let persists the flag)

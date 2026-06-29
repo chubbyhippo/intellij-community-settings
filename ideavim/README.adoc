@@ -19,6 +19,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 
 | `h` `j` `k` `l` | Move, dropping the selection
 | `H` `J` `K` `L` | Start / extend the selection
+| `1`–`9` `0` `-` | Extend the selection by N lines (`0` = 10, `-` upward)
 | `w` `W`         | Select word / WORD under the cursor (and arm grow mode)
 | `e` `E`         | Bare `e` steps to the next word; after `w`, `e e` grows the mark right
 | `b` `B`         | Bare `b` steps to the prev word; after `w`, `b b` grows the mark left
@@ -180,6 +181,7 @@ Emacs. The which-key popup lists each group as you type.
 | `SPC <CR>` | Context actions (≈ `embark-act`) → `ShowIntentionActions`
 | `SPC SPC`  | Alternate file (`<C-^>`)
 | `SPC /`    | Toggle line comment
+| `SPC 1`–`9` | Numeric count for the next command (`meow-digit-argument`)
 |===
 
 Where IntelliJ has no equivalent for an Emacs command the closest action is

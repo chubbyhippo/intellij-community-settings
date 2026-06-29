@@ -188,3 +188,43 @@ Where IntelliJ has no equivalent for an Emacs command the closest action is
 used (e.g. `dired` → the Project tool window, `org-agenda` → the TODO tool
 window, `org-capture` → a scratch file). `C-x C-c` quits Emacs; here `SPC x c`
 closes the project rather than the whole IDE.
+
+== IntelliJ feature leader keys (mnemonics)
+
+Alongside the Emacs/Meow leader above, these mnemonic groups reach common
+IntelliJ features. They sit only on prefixes the Emacs scheme leaves free, so
+the Meow/Emacs keys (`b`, `c`, `m`, `s`, `w`, `x`, `1`-`9`) are untouched.
+Adapted from the leader maps in
+https://github.com/chubbyhippo/intellij-settings[chubbyhippo/intellij-settings].
+
+[cols="1,3",options="header"]
+|===
+| Prefix | Features
+
+| `SPC .` | Settings / UI — compact, distraction-free, zen, full screen, keymap, LAF, plugins, restart, refresh
+| `SPC a` | Activate tool windows — project, VCS, run, debug, terminal, structure, problems, bookmarks, …
+| `SPC d` | Debug / run — debug, context debug, clear all marks
+| `SPC e` | Extract / refactor — method, interface, constant, field, parameter, variable; expand region; settings
+| `SPC f` | Find / format — find in path, find usages, reformat, recent files, reveal, new element
+| `SPC g` | Git / goto / generate — add, commit, push, pull, fetch, log, annotate, history; impl, super, test
+| `SPC h` | Hide all tool windows
+| `SPC i` | Introduce / inline — constant, field, parameter, variable, property; inline; implement; find action id
+| `SPC j` | Quick doc / quick implementations
+| `SPC k` | Change keymap
+| `SPC l` | Local history
+| `SPC n` | New — file, dir, element, project, scratch, terminal
+| `SPC o` | Open / optimize / override — open file, in browser, reveal, optimize imports, override, recent projects
+| `SPC p` | Popup / project / docs — quick doc, hover, parameter info, popup menu, goto file, run config, pin tab
+| `SPC q` | Quit the current window
+| `SPC r` | Run / refactor / replace — run/debug class, run anything, coverage, rename, refactor list, replace, revert
+| `SPC t` | Toggle / tabs / breakpoints — line breakpoint, compact, full screen, zen, line numbers, move tab
+| `SPC u` | Unwrap / pin tab
+| `SPC v` | VCS — commit, log, history, pull, push, view breakpoints
+|===
+
+The full per-key bindings live in the `.ideavimrc` (each group is commented).
+Groups whose mnemonic prefix belongs to the Emacs/Meow scheme — buffers (`b`),
+code (`c`), mode (`m`), search (`s`), windows (`w`) — are intentionally left out;
+their features stay reachable through the groups above (mode toggles on `SPC .`
+/ `SPC t`, buffers on `SPC b` = Switcher, windows on `SPC w`) or via `SPC m x`
+(Find Action).

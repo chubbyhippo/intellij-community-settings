@@ -177,7 +177,7 @@ Emacs. The which-key popup lists each group as you type.
 | Keys | Action
 
 | `SPC b`    | Buffers (`consult-buffer`) → `Switcher`
-| `SPC s`    | Search this file (`consult-line`) → `Find`
+| `SPC s s` | Search this file (`consult-line`) → `Find`
 | `SPC <CR>` | Context actions (≈ `embark-act`) → `ShowIntentionActions`
 | `SPC SPC`  | Alternate file (`<C-^>`)
 | `SPC /`    | Toggle line comment
@@ -217,6 +217,7 @@ https://github.com/chubbyhippo/intellij-settings[chubbyhippo/intellij-settings].
 | `SPC p` | Popup / project / docs — quick doc, hover, parameter info, popup menu, goto file, run config, pin tab
 | `SPC q` | Quit the current window
 | `SPC r` | Run / refactor / replace — run/debug class, run anything, coverage, rename, refactor list, replace, revert
+| `SPC s` | Search / show / surround — find (`s s`), go to symbol/class/file/action/usages, errors, hover, replace, surround, debug-step
 | `SPC t` | Toggle / tabs / breakpoints — line breakpoint, compact, full screen, zen, line numbers, move tab
 | `SPC u` | Unwrap / pin tab
 | `SPC v` | VCS — commit, log, history, pull, push, view breakpoints

@@ -105,9 +105,9 @@ map [e <action>(GotoPreviousError)
 " Whatever has no dedicated key is one M-x away: SPC m x = Find Action.
 
 " --- direct leader keys (meow-leader-define-key) ---
-" SPC b  consult-buffer        SPC s  consult-line (search this file)
+" SPC b  consult-buffer   (SPC s = consult-line now lives on SPC s s — see
+" the IntelliJ <leader>s group below)
 map <leader>b   <action>(Switcher)
-map <leader>s   <action>(Find)
 
 " --- SPC 1-9 = meow-digit-argument : a count for the next command ---
 " Vim already counts when you type a number directly; these mirror Meow, where
@@ -240,6 +240,7 @@ let g:WhichKeyDesc_ide_n   = "<leader>n new"
 let g:WhichKeyDesc_ide_o   = "<leader>o open / optimize / override"
 let g:WhichKeyDesc_ide_p   = "<leader>p popup / project / docs"
 let g:WhichKeyDesc_ide_r   = "<leader>r run / refactor / replace"
+let g:WhichKeyDesc_ide_s   = "<leader>s search / show / surround"
 let g:WhichKeyDesc_ide_t   = "<leader>t toggle / tabs / breakpoints"
 let g:WhichKeyDesc_ide_u   = "<leader>u unwrap / pin"
 let g:WhichKeyDesc_ide_v   = "<leader>v VCS"
@@ -413,6 +414,36 @@ map <leader>rr <action>(RunClass)
 map <leader>rs <action>(runShellFileAction)
 map <leader>ru <action>(ChooseRunConfiguration)
 map <leader>rw <action>(ReplaceInPath)
+
+" <leader>s — search / show / surround / debug-step
+" ss = consult-line/Find, moved off the bare SPC s; sS = GotoSymbol, relocated
+" from the source ss so nothing is lost
+map <leader>ss <action>(Find)
+map <leader>sS <action>(GotoSymbol)
+map <leader>sG <action>(ExternalSystem.ProjectRefreshAction)
+map <leader>sH <action>(Vcs.ShowTabbedFileHistory)
+map <leader>sI <action>(ShowIntentionActions)
+map <leader>sa <action>(GotoAction)
+map <leader>sc <action>(GotoClass)
+map <leader>sd <action>(QuickJavaDoc)
+map <leader>se <action>(ShowErrorDescription)
+map <leader>sf <action>(GotoFile)
+map <leader>sh <action>(ShowHoverInfo)
+map <leader>si <action>(StepInto)
+map <leader>sk <action>(TogglePresentationAssistantAction)
+map <leader>sM <action>(ExternalSystem.ProjectRefreshAction)
+map <leader>sO <action>(StepOut)
+map <leader>sP <action>(ShowPopupMenu)
+map <leader>sT <action>(Stop)
+map <leader>sm <action>(ShowPopupMenu)
+map <leader>sn <action>(ShowNavBar)
+map <leader>so <action>(StepOver)
+map <leader>sp <action>(TextSearchAction)
+map <leader>sr <action>(ReplaceInPath)
+map <leader>st <action>(TextSearchAction)
+map <leader>su <action>(ShowUsages)
+map <leader>sv :source ~/.ideavimrc<cr>
+map <leader>sw <action>(SurroundWith)
 
 " <leader>t — toggle / tabs / breakpoints
 map <leader>tb <action>(ToggleLineBreakpoint)

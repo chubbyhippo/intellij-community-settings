@@ -640,6 +640,9 @@ nnoremap ' .
 " cancel the selection (meow-cancel-selection)
 nnoremap g <Esc>
 xnoremap g <Esc>
+" jump back through the jumplist — meow-pop-selection (n / searches record jumps)
+nnoremap z <C-o>
+xnoremap z <Esc><C-o>
 " join lines (meow-join)
 nnoremap m J
 xnoremap m J

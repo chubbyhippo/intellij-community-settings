@@ -38,6 +38,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `r`             | Replace the selection with the clipboard
 | `m`             | Join lines
 | `g`             | Cancel the selection
+| `z`             | Jump back through the jumplist (meow-pop-selection ≈ Ctrl-O)
 | `v`             | Visit — open Find; `n` / `N` then walk the matches
 | `n` `N`         | After `w` / `W`, search for the word under the cursor; `;` reverses the direction
 | `q`             | Quit the editor

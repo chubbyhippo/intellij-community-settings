@@ -306,22 +306,35 @@ xnoremap J j
 xnoremap K k
 xnoremap L l
 
-" --- 1-9 / 0 / - : meow-expand-N (extend the selection by N lines) ---
-" Meow shows numbered hints and a digit expands to the Nth; IdeaVim has no hint
-" overlay, so while a selection is active a digit extends it by that many lines
-" (x then 3 = 3 more lines), 0 = 10, and - extends upward. Normal-mode counts
-" (3w) still work, and SPC 1-9 give a count there too.
-xnoremap 1 1j
-xnoremap 2 2j
-xnoremap 3 3j
-xnoremap 4 4j
-xnoremap 5 5j
-xnoremap 6 6j
-xnoremap 7 7j
-xnoremap 8 8j
-xnoremap 9 9j
-xnoremap 0 10j
-xnoremap - k
+" --- 1-9 / 0 / - : meow-expand-N (extend the selection by N units) ---
+" A digit extends the live selection by N; the unit tracks the selection type —
+" line-wise (from x) grows by lines, char-wise (from w / e / b / f / t) grows by
+" words. 0 = 10, and - extends back one unit. mode() picks the unit; like the
+" VWord* funcs above these are <expr> and only READ state (mode/line/col),
+" never write it. Normal-mode counts (3w) are untouched; SPC 1-9 count there too.
+function! MeowExpand(n)
+  if mode() ==# "V"
+    return a:n . "j"
+  endif
+  return a:n . "e"
+endfunction
+function! MeowExpandBack()
+  if mode() ==# "V"
+    return "k"
+  endif
+  return "b"
+endfunction
+xnoremap <expr> 1 MeowExpand(1)
+xnoremap <expr> 2 MeowExpand(2)
+xnoremap <expr> 3 MeowExpand(3)
+xnoremap <expr> 4 MeowExpand(4)
+xnoremap <expr> 5 MeowExpand(5)
+xnoremap <expr> 6 MeowExpand(6)
+xnoremap <expr> 7 MeowExpand(7)
+xnoremap <expr> 8 MeowExpand(8)
+xnoremap <expr> 9 MeowExpand(9)
+xnoremap <expr> 0 MeowExpand(10)
+xnoremap <expr> - MeowExpandBack()
 
 " --- selecting motions: enter Visual with a selection ---
 " w / W: mark the word / WORD and ARM grow mode (:let persists the flag)

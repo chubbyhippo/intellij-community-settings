@@ -17,24 +17,14 @@ set visualbell        " Use visual bell instead of audible
 " Which-Key style popup for <leader> mappings
 set which-key
 set notimeout
-" Which-Key group descriptions for leader prefixes
-let g:WhichKeyDesc_dot = "<leader>. Settings..."
-let g:WhichKeyDesc_a = "<leader>a Activate..."
-let g:WhichKeyDesc_c = "<leader>c Config, Call, Collapse, Clear, Change..."
-let g:WhichKeyDesc_e = "<leader>e Extract, Edit..."
-let g:WhichKeyDesc_f = "<leader>f Format, Find..."
-let g:WhichKeyDesc_g = "<leader>g Git, Generate, Goto..."
-let g:WhichKeyDesc_i = "<leader>i Inline, Introduce, Id..."
-let g:WhichKeyDesc_j = "<leader>j Jump, JavaDoc..."
-let g:WhichKeyDesc_l = "<leader>l LocalHistory..."
-let g:WhichKeyDesc_m = "<leader>m Mode..."
-let g:WhichKeyDesc_n = "<leader>n New..."
-let g:WhichKeyDesc_o = "<leader>o Open, Optimize, Override..."
-let g:WhichKeyDesc_p = "<leader>p Popup, Project..."
-let g:WhichKeyDesc_r = "<leader>r Refactorings, Run ..."
-let g:WhichKeyDesc_s = "<leader>s Search, Stop, Show, Surround, Source..."
-let g:WhichKeyDesc_t = "<leader>t Toggle..."
-let g:WhichKeyDesc_v = "<leader>v Vcs..."
+" Which-Key group descriptions — the leader mirrors the Emacs/Meow keypad
+let g:WhichKeyDesc_leader_x  = "<leader>x C-x · file / buffer / window"
+let g:WhichKeyDesc_leader_xp = "<leader>xp C-x p · project"
+let g:WhichKeyDesc_leader_c  = "<leader>c C-c · commands (= M-m)"
+let g:WhichKeyDesc_leader_cj = "<leader>cj C-c j · avy jump"
+let g:WhichKeyDesc_leader_m  = "<leader>m M- · meta"
+let g:WhichKeyDesc_leader_ms = "<leader>ms M-s · search"
+let g:WhichKeyDesc_leader_w  = "<leader>w window map (Emacs C-c w)"
 
 " Control-key handler routing: whether keys go to IDE or Vim
 " a - all modes, n - normal, i - insert, v - visual
@@ -70,7 +60,9 @@ sethandler <c-[> a:vim
 " Space is the leader key
 let mapleader=" "
 
-" M-m behaves like <leader> (must be map, not noremap)
+" M-m behaves like <leader> (must be map, not noremap). In init.el M-m is
+" translated to C-c (key-translation-map), and the leader's SPC c mirrors C-c,
+" so Alt-m here is the same "command prefix" entry point.
 map <A-m> <Space>
 
 " meow-search: n / N repeat the IDE search (Emacs C-s starts it; v opens Find)
@@ -83,11 +75,15 @@ map = <action>(StretchSplitToTop)
 map _ <action>(StretchSplitToLeft)
 map + <action>(StretchSplitToRight)
 
-" Quick editing/reloading of IdeaVim config
-map <Space>.v :edit ~/.ideavimrc<cr>
-map <Space>sV :source ~/.ideavimrc<cr>
+" EasyMotion / avy — enabled here so the leader maps below can reach its <Plug>
+" targets. init.el meow parity: S = avy-goto-char-timer (2-char jump),
+" Q = avy-goto-line (lowercase s is meow-kill / cut — see the Meow section).
+let g:EasyMotion_do_mapping=0
+set easymotion
+nmap S <Plug>(easymotion-bd-f2)
+nmap Q <Plug>(easymotion-bd-jk)
 
-" VCS / diff / error navigation
+" VCS / diff / error navigation (diff-hl C-x v ] / [, flymake-style next/prev)
 map ]c <action>(VcsShowNextChangeMarker)
 map [c <action>(VcsShowPrevChangeMarker)
 map ]d <action>(NextDiff)
@@ -95,301 +91,120 @@ map [d <action>(PreviousDiff)
 map ]e <action>(GotoNextError)
 map [e <action>(GotoPreviousError)
 
-" <leader>. group – IDE / UI toggles & settings
-map <leader>.c <action>(ToggleCompactMode)
-map <leader>.C <action>(CloseProject)
-map <leader>.d <action>(ToggleDistractionFreeMode)
-map <leader>.f <action>(ToggleFullScreen)
-map <leader>.k <action>(ChangeKeymap)
-map <leader>.l <action>(EditorToggleShowLineNumbers)
-map <leader>.m <action>(ExternalSystem.ProjectRefreshAction)
-map <leader>.p <action>(WelcomeScreen.Plugins)
-map <leader>.r <action>(RunConfiguration)
-map <leader>.R <action>(RestartIde)
-map <leader>.s <action>(SettingsEntryPoint)
-map <leader>.t <action>(ChangeLaf)
-map <leader>.T <action>(ViewToolButtons)
-map <leader>.z <action>(ToggleZenMode)
+" ============================================================================
+" Leader = Emacs / Meow keypad
+" ----------------------------------------------------------------------------
+" The leader (<Space>, also Alt-m) mirrors how Meow's keypad reaches the Emacs
+" keymap in init.el: press the same keys after <Space> that you'd press after
+" SPC in Emacs, and you get the IntelliJ action matching that Emacs command.
+"   SPC x  = the C-x prefix (files / buffers / windows)
+"   SPC c  = the C-c prefix (= M-m; the personal commands in init.el)
+"   SPC m  = the M- (Meta) prefix
+"   SPC w  = the window map (Emacs C-c w, "SPC w" in Meow)
+" So SPC x f = C-x C-f = find-file, SPC c f = C-c f = find-file, SPC m x = M-x.
+" Whatever has no dedicated key is one M-x away: SPC m x = Find Action.
 
-" <leader>a – Activate tool windows
-map <leader>ab <action>(ActivateBookmarksToolWindow)
-map <leader>aB <action>(ActivateBuildToolWindow)
-map <leader>ac <action>(ActivateCommitToolWindow)
-map <leader>aC <action>(ActivateCoverageToolWindow)
-map <leader>ad <action>(ActivateDebugToolWindow)
-map <leader>aD <action>(ActivateServicesToolWindow)
-map <leader>af <action>(ActivateFindToolWindow)
-map <leader>ag <action>(ActivateVersionControlToolWindow)
-map <leader>aG <action>(ActivateGradleToolWindow)
-map <leader>ah <action>(ActivateHierarchyToolWindow)
-map <leader>ai <action>(ActivateAIAssistantToolWindow)
-map <leader>ak <action>(TogglePresentationAssistantAction)
-map <leader>am <action>(ActivateMavenToolWindow)
-map <leader>an <action>(ActivateNotificationsToolWindow)
-map <leader>ap <action>(ActivateProjectToolWindow)
-map <leader>aP <action>(ActivateProblemsViewToolWindow)
-map <leader>ar <action>(ActivateRunToolWindow)
-map <leader>as <action>(ActivateStructureToolWindow)
-map <leader>aS <action>(ActivateServicesToolWindow)
-map <leader>at <action>(ActivateTerminalToolWindow)
-map <leader>aT <action>(ActivateTaskToolWindow)
-map <leader>av <action>(ActivateVersionControlToolWindow)
-map <leader>aw <action>(Git.Show.WorkingTrees)
+" --- direct leader keys (meow-leader-define-key) ---
+" SPC b  consult-buffer        SPC s  consult-line (search this file)
+map <leader>b   <action>(Switcher)
+map <leader>s   <action>(Find)
 
-" Education plugin helpers
-map <leader>C <action>(Educational.Check)
+" --- SPC x = C-x : files / buffers / windows ---
+" f find-file        s save         b buffers      k kill-buffer
+" d dired(project)   g magit(VCS)   o other-window u undo history
+" v vc-prefix        c quit         0/1/2/3 splits
+map <leader>xf  <action>(GotoFile)
+map <leader>xs  <action>(SaveAll)
+map <leader>xb  <action>(Switcher)
+map <leader>xk  <action>(CloseContent)
+map <leader>xd  <action>(ActivateProjectToolWindow)
+map <leader>xg  <action>(ActivateVersionControlToolWindow)
+map <leader>xo  <action>(NextSplitter)
+map <leader>xu  <action>(LocalHistory.ShowHistory)
+map <leader>xv  <action>(Vcs.Operations.Popup)
+map <leader>xc  <action>(CloseProject)
+map <leader>x0  <action>(Unsplit)
+map <leader>x1  <action>(UnsplitAll)
+map <leader>x2  <action>(SplitHorizontally)
+map <leader>x3  <action>(SplitVertically)
 
-" Code /clear / close / collapse / config
-map <leader>ca <action>(ShowIntentionActions)
-map <leader>cd <action>(GotoDeclaration)
-map <leader>cf <action>(ReformatCode)
-map <leader>ch <action>(CallHierarchy)
-map <leader>ci <action>(OptimizeImports)
-map <leader>ck <action>(ChangeKeymap)
-map <leader>cn <action>(ClearAllNotifications)
-map <leader>co <action>(OptimizeImports)
-map <leader>cO <action>(CloseAllEditorsButActive)
-map <leader>cp <action>(WelcomeScreen.Plugins)
-map <leader>cr <action>(RenameElement)
-map <leader>cR <action>(Refactorings.QuickListPopupAction)
-map <leader>cs <action>(SettingsEntryPoint)
-map <leader>cv :edit ~/.ideavimrc<cr>
+" --- SPC x p = C-x p : project.el ---
+" f find-file   b buffer   g grep   r replace   c compile
+map <leader>xpf <action>(GotoFile)
+map <leader>xpb <action>(Switcher)
+map <leader>xpg <action>(FindInPath)
+map <leader>xpr <action>(ReplaceInPath)
+map <leader>xpc <action>(CompileProject)
 
-" Debug / run mappings
-map <leader>db <action>(Debug)
-map <leader>dd <action>(ContextDebug)
-map <leader>de <action>(Debug)
-" Clear all marks
-map <leader>dm :delmarks 0-9A-Z<cr>
+" --- SPC c = C-c : commands (= M-m) ---
+" f find-file  s save  k kill-buffer  b buffers  r ripgrep  e expand
+" a agenda(TODO)  c capture(scratch)  l store-link(copy ref)  g git file ops
+" v / V edit / reload this config
+map <leader>cf  <action>(GotoFile)
+map <leader>cs  <action>(SaveAll)
+map <leader>ck  <action>(CloseContent)
+map <leader>cb  <action>(Switcher)
+map <leader>cr  <action>(FindInPath)
+map <leader>ce  <action>(EditorSelectWord)
+map <leader>ca  <action>(ActivateTODOToolWindow)
+map <leader>cc  <action>(NewScratchFile)
+map <leader>cl  <action>(CopyReference)
+map <leader>cg  <action>(Vcs.Operations.Popup)
+map <leader>cv  :edit ~/.ideavimrc<cr>
+map <leader>cV  :source ~/.ideavimrc<cr>
 
-" <leader>e – extract / edit / expand
-map <leader>eI <action>(ShowSettings)
-map <leader>eP <action>(ShowProjectStructureSettings)
-map <leader>eR <action>(editRunConfigurations)
-map <leader>eS <action>(ShowSettings)
-map <leader>ea <action>(ExpandAllRegions)
-map <leader>ec <action>(IntroduceConstant)
-map <leader>ef <action>(IntroduceField)
-map <leader>ei <action>(ExtractInterface)
-map <leader>em <action>(ExtractMethod)
-map <leader>ep <action>(IntroduceParameter)
-map <leader>er <action>(ExpandRegion)
-map <leader>ev <action>(IntroduceVariable)
-map <leader>eV <action>(refactoring.introduce.property)
+" --- SPC c j = C-c j : avy jumps (-> EasyMotion) ---
+" w avy-goto-char-2   c avy-goto-char-timer   l avy-goto-line
+map <leader>cjw <Plug>(easymotion-bd-f2)
+map <leader>cjc <Plug>(easymotion-bd-f2)
+map <leader>cjl <Plug>(easymotion-bd-jk)
 
-" <leader>f – find / format
-map <leader>fe <action>(RevealIn)
-map <leader>ff <action>(FindInPath)
-map <leader>fi <action>(Find)
-map <leader>fm <action>(ReformatCode)
-map <leader>fn <action>(NewElement)
-map <leader>fo <action>(ReformatCode)
-map <leader>fp <action>(FindInPath)
-map <leader>fr <action>(RecentFiles)
-map <leader>fs <action>(ToggleFullScreen)
-map <leader>fu <action>(FindUsages)
+" --- SPC m = M- : meta ---
+" x execute-command  o avy  r expand  R contract  y yank-pop
+" . dwim (go-to-def)  g avy-goto-line
+map <leader>mx  <action>(GotoAction)
+map <leader>mo  <Plug>(easymotion-bd-f2)
+map <leader>mr  <action>(EditorSelectWord)
+map <leader>mR  <action>(EditorUnSelectWord)
+map <leader>my  <action>(PasteMultiple)
+map <leader>m.  <action>(GotoDeclaration)
+map <leader>mg  <Plug>(easymotion-bd-jk)
 
-" <leader>g – Git / goto / generate
-map <leader>gP <action>(Vcs.Push)
-map <leader>gT <action>(GotoTest)
-map <leader>ga <action>(Git.Add)
-map <leader>gb <action>(Annotate)
-map <leader>gc <action>(CheckinProject)
-map <leader>ge <action>(Generate)
-map <leader>gf <action>(Git.Fetch)
-map <leader>gg <action>(ActivateVersionControlToolWindow)
-map <leader>gh <action>(Vcs.ShowTabbedFileHistory)
-map <leader>gi <action>(GotoImplementation)
-map <leader>gl <action>(Vcs.Show.Log)
-map <leader>gp <action>(Git.Pull)
-map <leader>gs <action>(GotoSuperMethod)
-map <leader>gt <action>(GotoTest)
-map <leader>gw <action>(Git.Show.WorkingTrees)
+" --- SPC m s = M-s : consult search family ---
+" r ripgrep  l line  s line  L line-multi  o outline
+map <leader>msr <action>(FindInPath)
+map <leader>msl <action>(Find)
+map <leader>mss <action>(Find)
+map <leader>msL <action>(FindInPath)
+map <leader>mso <action>(FileStructurePopup)
 
-" Hide all tool windows
-map <leader>h <action>(HideAllWindows)
+" --- SPC w = the window map (Emacs C-c w) ---
+" v / s  split right / below     d delete      D / m delete-others (maximize)
+" w other-window   W swap        h j k l focus move
+" i / = zoom in     o / - zoom out     u / 0 reset zoom
+map <leader>wv  <action>(SplitVertically)
+map <leader>ws  <action>(SplitHorizontally)
+map <leader>wd  <action>(Unsplit)
+map <leader>wD  <action>(UnsplitAll)
+map <leader>wm  <action>(UnsplitAll)
+map <leader>ww  <action>(NextSplitter)
+map <leader>wW  <action>(MoveEditorToOppositeTabGroup)
+map <leader>wh  <c-w>h
+map <leader>wj  <c-w>j
+map <leader>wk  <c-w>k
+map <leader>wl  <c-w>l
+map <leader>wi  <action>(EditorIncreaseFontSize)
+map <leader>w=  <action>(EditorIncreaseFontSize)
+map <leader>wo  <action>(EditorDecreaseFontSize)
+map <leader>w-  <action>(EditorDecreaseFontSize)
+map <leader>wu  <action>(EditorResetFontSize)
+map <leader>w0  <action>(EditorResetFontSize)
 
-" <leader>i – introduce / inline / id
-map <leader>ic <action>(IntroduceConstant)
-map <leader>id <action>(VimFindActionIdAction)
-map <leader>if <action>(IntroduceField)
-map <leader>il <action>(Inline)
-map <leader>im <action>(ImplementMethods)
-map <leader>in <action>(Inline)
-map <leader>ip <action>(IntroduceParameter)
-map <leader>iP <action>(refactoring.introduce.property)
-map <leader>iv <action>(IntroduceVariable)
-
-" Quick docs / implementations
-map <leader>jd <action>(QuickJavaDoc)
-map <leader>ji <action>(QuickImplementations)
-
-" Avy-style jumps (requires AceJump + IdeaVim-EasyMotion plugins)
-" Keep easymotion from claiming <leader><leader> (bound to alternate-file above)
-let g:EasyMotion_do_mapping=0
-set easymotion
-" init.el meow parity: S = avy-goto-char-timer (2-char jump), Q = avy-goto-line
-" (lowercase s is meow-kill / cut — see the Meow section at the bottom)
-nmap S <Plug>(easymotion-bd-f2)
-nmap Q <Plug>(easymotion-bd-jk)
-
-" Change keymap
-map <leader>k <action>(ChangeKeymap)
-
-" Local history
-map <leader>lh <action>(LocalHistory.ShowHistory)
-map <leader>lH <action>(LocalHistory.ShowSelectionHistory)
-
-" Mode & mouse
-map <leader>mc <action>(ToggleCompactMode)
-map <leader>md <action>(ToggleDistractionFreeMode)
-map <leader>mf <action>(ToggleFullScreen)
-map <leader>mh <action>(ShowHoverInfo)
-map <leader>mk <action>(TogglePresentationAssistantAction)
-map <leader>mp <action>(TogglePresentationAssistantAction)
-map <leader>mP <action>(TogglePresentationMode)
-map <leader>mt <action>(ViewToolButtons)
-map <leader>mT <action>(ViewToolBar)
-map <leader>mv <action>(ChangeView)
-map <leader>mw <action>(ViewToolBar)
-map <leader>mz <action>(ToggleZenMode)
-
-" Education plugin navigation
-map <leader>N <action>(Educational.NextTask)
-
-" <leader>n – new (project/file/scratch/etc.)
-map <leader>nd <action>(NewDir)
-map <leader>ne <action>(NewElement)
-map <leader>nf <action>(NewFile)
-map <leader>np <action>(NewProject)
-map <leader>ns <action>(Macro.NewScratchFile)
-map <leader>nt <action>(TerminalNewPredefinedSession)
-
-" <leader>o – open / optimize / override
-map <leader>oP <action>(OpenFile)
-map <leader>ob <action>(OpenInBrowser)
-map <leader>oe <action>(RevealIn)
-map <leader>of <action>(OpenFile)
-map <leader>og <action>(Vcs.Log.OpenAnotherTabInEditor)
-map <leader>oi <action>(OptimizeImports)
-map <leader>om <action>(OverrideMethods)
-map <leader>op <action>(ActivateProjectToolWindow)
-map <leader>or <action>(RecentProjectListGroup)
-map <leader>ot <action>(Terminal.OpenInTerminal)
-
-" Project/ Popup / parameter info / docs
-map <leader>pd <action>(QuickJavaDoc)
-map <leader>pf <action>(GotoFile)
-map <leader>ph <action>(ShowHoverInfo)
-map <leader>pi <action>(QuickImplementations)
-map <leader>pm <action>(ShowPopupMenu)
-map <leader>pp <action>(ParameterInfo)
-map <leader>pr <action>(RunConfiguration)
-map <leader>pt <action>(PinActiveTabToggle)
-
-" Quit current window
-map <leader>q :q<CR>
-
-" <leader>r – run / refactor / replace
-map <leader>rA <action>(RunnerActions)
-map <leader>rB <action>(ChangesView.Revert)
-map <leader>rC <action>(Coverage)
-map <leader>ra <action>(RunAnything)
-map <leader>rb <action>(Vcs.RollbackChangedLines)
-map <leader>rc <action>(RunCoverage)
-map <leader>rd <action>(DebugClass)
-map <leader>re <action>(Refactorings.QuickListPopupAction)
-map <leader>rf <action>(RecentFiles)
-map <leader>ri <action>(RevealIn)
-map <leader>rl <action>(RecentLocations)
-map <leader>rm <action>(RunMenu)
-map <leader>rn <action>(RenameElement)
-map <leader>ro <action>(ChangesView.Revert)
-map <leader>rp <action>(Replace)
-map <leader>rr <action>(RunClass)
-map <leader>rs <action>(runShellFileAction)
-map <leader>ru <action>(ChooseRunConfiguration)
-map <leader>rw <action>(ReplaceInPath)
-
-" <leader>s – search / show / surround
-map <leader>sG <action>(ExternalSystem.ProjectRefreshAction)
-map <leader>sH <action>(Vcs.ShowTabbedFileHistory)
-map <leader>sI <action>(ShowIntentionActions)
-map <leader>sa <action>(GotoAction)
-map <leader>sc <action>(GotoClass)
-map <leader>sd <action>(QuickJavaDoc)
-map <leader>se <action>(ShowErrorDescription)
-map <leader>sf <action>(GotoFile)
-map <leader>sh <action>(ShowHoverInfo)
-map <leader>si <action>(QuickImplementations)
-map <leader>sk <action>(TogglePresentationAssistantAction)
-" Debug stepping
-map <leader>sM <action>(ExternalSystem.ProjectRefreshAction)
-map <leader>sO <action>(StepOut)
-map <leader>sP <action>(ShowPopupMenu)
-map <leader>sT <action>(Stop)
-map <leader>si <action>(StepInto)
-map <leader>sm <action>(ShowPopupMenu)
-map <leader>sn <action>(ShowNavBar)
-map <leader>so <action>(StepOver)
-map <leader>sp <action>(TextSearchAction)
-map <leader>sr <action>(ReplaceInPath)
-map <leader>ss <action>(GotoSymbol)
-map <leader>st <action>(TextSearchAction)
-map <leader>su <action>(ShowUsages)
-map <leader>sv :source ~/.ideavimrc<cr>
-map <leader>sw <action>(SurroundWith)
-
-" <leader>t – toggles / tabs / breakpoints
-map <leader>tb <action>(ToggleLineBreakpoint)
-map <leader>tc <action>(ToggleCompactMode)
-map <leader>tf <action>(ToggleFullScreen)
-map <leader>th :tabm<Space>-<CR>
-map <leader>tk <action>(TogglePresentationAssistantAction)
-map <leader>tl :tabm<Space>+<CR>
-map <leader>tn :set number!<CR>
-map <leader>tr :set relativenumber!<CR>
-map <leader>tt <action>(ViewToolButtons)
-map <leader>tv <action>(VimPluginToggle)
-map <leader>tz <action>(ToggleZenMode)
-
-" <leader>u – unwrap / pin tab
-map <leader>up <action>(PinActiveTabToggle)
-map <leader>uw <action>(Unwrap)
-
-" <leader>v – VCS
-map <leader>vb <action>(ViewBreakpoints)
-map <leader>vc <action>(CheckinProject)
-map <leader>vh <action>(Vcs.ShowTabbedFileHistory)
-map <leader>vl <action>(Vcs.Show.Log)
-map <leader>vp <action>(Git.Pull)
-map <leader>vP <action>(Vcs.Push)
-
-" <leader>w – windows
-map <leader>wc :q<CR>
-map <leader>wd :q<CR>
-map <leader>wh <c-w>h
-map <leader>wj <c-w>j
-map <leader>wk <c-w>k
-map <leader>wl <c-w>l
-map <leader>wq :q<CR>
-map <leader>ws :sp<CR>
-map <leader>wv :vs<CR>
-
-" Show intention actions
-map <leader><cr> <action>(ShowIntentionActions)
-
-" Quick buffer switch: double leader jumps to alternate file
+" --- non-prefixed extras ---
+" SPC <CR> ~ embark-act (Alt-Enter)   SPC SPC alternate file   SPC / comment
+map <leader><cr>     <action>(ShowIntentionActions)
 map <leader><leader> <c-^>
-
-" Comment / uncomment current line or selection
-map <leader>/ <action>(CommentByLineComment)
-
-" Education plugin mappings
-map <leader>C <action>(Educational.Check)
-map <leader>N <action>(Educational.NextTask)
-map <leader>P <action>(Educational.PreviousTask)
-map <leader>R <action>(Educational.RefreshTask)
+map <leader>/        <action>(CommentByLineComment)
 
 " ============================================================================
 " Meow-style selection-first editing (mirrors the Emacs init.el meow QWERTY)

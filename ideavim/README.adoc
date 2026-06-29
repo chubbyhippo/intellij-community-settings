@@ -51,4 +51,138 @@ IDE and works in all modes: `C-a`/`C-e` line ends, `C-f`/`C-b`/`C-n`/`C-p`
 motion, `C-d` delete, `C-k` kill-line, `C-w`/`M-w` cut/copy, `C-y` yank,
 `C-space` set mark, `C-g` cancel, `C-s`/`C-r` search, the `C-x` prefix, and
 `M-x`. Only `C-[` stays with Vim, as the way back to normal mode. The leader is
-`<Space>` (also `Alt-m`).
+`<Space>` (also `Alt-m`) — see the leader reference below.
+
+== Leader key — Emacs / Meow keypad
+
+The leader (`<Space>`, also `Alt-m`) mirrors how Meow's *keypad* reaches the
+Emacs keymap in `init.el`. Press the same keys after `<Space>` that you would
+press after `SPC` in Emacs and you get the IntelliJ action matching that Emacs
+command — so `SPC x f` = `C-x C-f` = `find-file`, `SPC c f` = `C-c f` =
+`find-file`, and `SPC m x` = `M-x`. Anything without a dedicated key is one
+`M-x` away: `SPC m x` opens *Find Action*, exactly as `M-x` runs any command in
+Emacs. The which-key popup lists each group as you type.
+
+[cols="1,3",options="header"]
+|===
+| Prefix | Mirrors
+
+| `SPC x`   | the Emacs `C-x` prefix — files, buffers, windows
+| `SPC x p` | `C-x p` — `project.el`
+| `SPC c`   | the Emacs `C-c` prefix (`= M-m`) — the personal commands in `init.el`
+| `SPC c j` | `C-c j` — avy jumps
+| `SPC m`   | the `M-` (Meta) prefix
+| `SPC m s` | `M-s` — the consult search family
+| `SPC w`   | the window map (Emacs `C-c w`, `SPC w` in Meow)
+|===
+
+=== `SPC x` — `C-x` (files · buffers · windows)
+
+[cols="1,2,2",options="header"]
+|===
+| Keys | Emacs | IntelliJ action
+
+| `x f` | `C-x C-f` find-file           | `GotoFile`
+| `x s` | `C-x C-s` save-buffer         | `SaveAll`
+| `x b` | consult-buffer                | `Switcher`
+| `x k` | kill-buffer                   | `CloseContent`
+| `x d` | `C-x d` dired                 | `ActivateProjectToolWindow`
+| `x g` | `C-x g` magit-status          | `ActivateVersionControlToolWindow`
+| `x o` | `C-x o` other-window          | `NextSplitter`
+| `x u` | `C-x u` undo (vundo)          | `LocalHistory.ShowHistory`
+| `x v` | `C-x v` vc-prefix             | `Vcs.Operations.Popup`
+| `x c` | `C-x C-c` quit                | `CloseProject`
+| `x 0` | `C-x 0` delete-window         | `Unsplit`
+| `x 1` | `C-x 1` delete-other-windows  | `UnsplitAll`
+| `x 2` | `C-x 2` split below           | `SplitHorizontally`
+| `x 3` | `C-x 3` split right           | `SplitVertically`
+|===
+
+=== `SPC x p` — `C-x p` (project)
+
+[cols="1,2,2",options="header"]
+|===
+| Keys | Emacs | IntelliJ action
+
+| `x p f` | project-find-file | `GotoFile`
+| `x p b` | project buffer    | `Switcher`
+| `x p g` | project grep      | `FindInPath`
+| `x p r` | project replace   | `ReplaceInPath`
+| `x p c` | project-compile   | `CompileProject`
+|===
+
+=== `SPC c` — `C-c` (commands, `= M-m`)
+
+[cols="1,2,2",options="header"]
+|===
+| Keys | Emacs | IntelliJ action
+
+| `c f` | `C-c f` find-file             | `GotoFile`
+| `c s` | `C-c s` save-buffer           | `SaveAll`
+| `c k` | `C-c k` kill-current-buffer   | `CloseContent`
+| `c b` | `C-c b` consult-buffer        | `Switcher`
+| `c r` | `C-c r` consult-ripgrep       | `FindInPath`
+| `c e` | `C-c e` expreg-expand         | `EditorSelectWord`
+| `c a` | `C-c a` org-agenda            | `ActivateTODOToolWindow`
+| `c c` | `C-c c` org-capture           | `NewScratchFile`
+| `c l` | `C-c l` org-store-link        | `CopyReference`
+| `c g` | `C-c M-g` magit-file-dispatch | `Vcs.Operations.Popup`
+| `c v` / `c V` | edit / reload this config | `:edit` / `:source ~/.ideavimrc`
+| `c j w` | `C-c j w` avy-goto-char-2     | EasyMotion 2-char
+| `c j c` | `C-c j c` avy-goto-char-timer | EasyMotion 2-char
+| `c j l` | `C-c j l` avy-goto-line       | EasyMotion line
+|===
+
+=== `SPC m` — `M-` (meta)
+
+[cols="1,2,2",options="header"]
+|===
+| Keys | Emacs | IntelliJ action
+
+| `m x` | `M-x` execute-extended-command | `GotoAction` (Find Action)
+| `m o` | `M-o` avy-goto-char-timer       | EasyMotion 2-char
+| `m r` | `M-r` expreg-expand             | `EditorSelectWord`
+| `m R` | `M-R` expreg-contract           | `EditorUnSelectWord`
+| `m y` | `M-y` consult-yank-pop          | `PasteMultiple`
+| `m .` | `M-.` embark-dwim               | `GotoDeclaration`
+| `m g` | `M-g g` avy-goto-line           | EasyMotion line
+| `m s r` | `M-s r` consult-ripgrep       | `FindInPath`
+| `m s l` / `m s s` | `M-s l` consult-line | `Find`
+| `m s L` | `M-s L` consult-line-multi    | `FindInPath`
+| `m s o` | `M-s o` consult-outline       | `FileStructurePopup`
+|===
+
+=== `SPC w` — window map (Emacs `C-c w`)
+
+[cols="1,3",options="header"]
+|===
+| Keys | Action
+
+| `w v` / `w s` | Split right / below (`split-window-right` / `-below`)
+| `w d`         | Delete this split (`delete-window`)
+| `w D` / `w m` | Delete the other splits / maximize (`delete-other-windows`)
+| `w w`         | Other window (`other-window`)
+| `w W`         | Swap with the opposite group (`ace-swap-window`)
+| `w h` `w j` `w k` `w l` | Move focus left / down / up / right (`windmove`)
+| `w i` / `w =` | Zoom in (`text-scale-increase`)
+| `w o` / `w -` | Zoom out (`text-scale-decrease`)
+| `w u` / `w 0` | Reset zoom (`text-scale-reset`)
+|===
+
+=== Direct keys & extras
+
+[cols="1,3",options="header"]
+|===
+| Keys | Action
+
+| `SPC b`    | Buffers (`consult-buffer`) → `Switcher`
+| `SPC s`    | Search this file (`consult-line`) → `Find`
+| `SPC <CR>` | Context actions (≈ `embark-act`) → `ShowIntentionActions`
+| `SPC SPC`  | Alternate file (`<C-^>`)
+| `SPC /`    | Toggle line comment
+|===
+
+Where IntelliJ has no equivalent for an Emacs command the closest action is
+used (e.g. `dired` → the Project tool window, `org-agenda` → the TODO tool
+window, `org-capture` → a scratch file). `C-x C-c` quits Emacs; here `SPC x c`
+closes the project rather than the whole IDE.

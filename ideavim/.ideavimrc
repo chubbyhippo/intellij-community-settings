@@ -640,9 +640,10 @@ nnoremap ' .
 " cancel the selection (meow-cancel-selection)
 nnoremap g <Esc>
 xnoremap g <Esc>
-" jump back through the jumplist — meow-pop-selection (n / searches record jumps)
-nnoremap z <C-o>
-xnoremap z <Esc><C-o>
+" jump back through the jumplist and reselect the word — meow-pop-selection
+" (n / searches record jumps; viw restores the highlight at the landing spot)
+nnoremap z <C-o>viw
+xnoremap z <Esc><C-o>viw
 " join lines (meow-join)
 nnoremap m J
 xnoremap m J

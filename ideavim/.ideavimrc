@@ -68,6 +68,11 @@ map <A-m> <Space>
 " meow-search: n / N repeat the IDE search (Emacs C-s starts it; v opens Find)
 nnoremap n <action>(FindNext)
 nnoremap N <action>(FindPrevious)
+" In a selection (after w / W), n / N jump to the next / prev occurrence of
+" the word under the cursor and reselect it — meow-search after meow-mark-word.
+" * / # re-derive the word each time and wrap, so no stale-pattern E486.
+xnoremap n <Esc>*viw
+xnoremap N <Esc>#viw
 
 " Resize editor splits with - = _ +
 map - <action>(StretchSplitToBottom)

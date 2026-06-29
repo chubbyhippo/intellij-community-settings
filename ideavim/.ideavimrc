@@ -68,25 +68,19 @@ map <A-m> <Space>
 " meow-search: n / N repeat the IDE search (Emacs C-s starts it; v opens Find)
 nnoremap n <action>(FindNext)
 nnoremap N <action>(FindPrevious)
-" In a selection (after w / W), n / N jump to the next / prev occurrence of
-" the word under the cursor and reselect it — meow-search after meow-mark-word.
-" * / # re-derive the word each time and wrap, so no stale-pattern E486.
-" Direction follows the selection: ; (meow-reverse) flips it, so ; then n walks
-" backward and keeps going that way. <expr> funcs only READ state, never write.
+" In a selection (after w / W), n / N search for the word under the cursor and
+" reselect the match — meow-search after meow-mark-word. The direction follows
+" the selection, which ; (meow-reverse) flips: w then n walks forward, ; then n
+" walks backward and keeps going that way. * / # re-derive the word and wrap, so
+" no stale-pattern E486. <expr> funcs only READ state, never write it.
 function! MeowSearchN()
   if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
     return "\<Esc>#viwo"
   endif
   return "\<Esc>*viw"
 endfunction
-function! MeowSearchP()
-  if line(".") < line("v") || (line(".") == line("v") && col(".") < col("v"))
-    return "\<Esc>*viwo"
-  endif
-  return "\<Esc>#viw"
-endfunction
 xnoremap <expr> n MeowSearchN()
-xnoremap <expr> N MeowSearchP()
+xnoremap <expr> N MeowSearchN()
 
 " Resize editor splits with - = _ +
 map - <action>(StretchSplitToBottom)

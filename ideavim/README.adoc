@@ -39,7 +39,7 @@ with `x` (select line) then `s`/`d`/`c`/`y`.
 | `m`             | Join lines
 | `g`             | Cancel the selection
 | `v`             | Visit — open Find; `n` / `N` then walk the matches
-| `n` `N`         | After `w` / `W`, jump to the next / prev occurrence of the word; `;` reverses the direction
+| `n` `N`         | After `w` / `W`, search for the word under the cursor; `;` reverses the direction
 | `q`             | Quit the editor
 | `u` `U`         | Undo / redo (the IDE's, shared with Emacs `C-/`)
 | `'`             | Repeat the last change

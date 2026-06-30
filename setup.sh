@@ -31,7 +31,6 @@ for config_path in \
     # install templates
     mkdir -p "$config_path/templates"
     curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/templates/javaJava.xml" -o "$config_path/templates/javaJava.xml"
-    curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/templates/javaJackson.xml" -o "$config_path/templates/javaJackson.xml"
     curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/templates/javaJUnit.xml" -o "$config_path/templates/javaJUnit.xml"
     curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/templates/javaMockito.xml" -o "$config_path/templates/javaMockito.xml"
     curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/config/templates/javaSpring.xml" -o "$config_path/templates/javaSpring.xml"

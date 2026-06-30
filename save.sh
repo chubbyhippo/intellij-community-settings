@@ -25,7 +25,6 @@ for config_path in \
     cp -f "$config_path"/templates/javaJava.xml ./config/templates/javaJava.xml
     # save other templates
     cp -f "$config_path"/templates/javaJUnit.xml ./config/templates/javaJUnit.xml
-    cp -f "$config_path"/templates/javaJackson.xml ./config/templates/javaJackson.xml
     cp -f "$config_path"/templates/javaMockito.xml ./config/templates/javaMockito.xml
     cp -f "$config_path"/templates/javaSpring.xml ./config/templates/javaSpring.xml
     cp -f "$config_path"/templates/javaWireMock.xml ./config/templates/javaWireMock.xml

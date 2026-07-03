@@ -101,7 +101,27 @@ set easymotion
 nmap S <Plug>(easymotion-bd-f2)
 nmap Q <Plug>(easymotion-bd-jk)
 
+" Multiple cursors — powers the meow BEACON approximation (see the Meow
+" section). Keep the stock <A-n> / <A-x> / <A-p> keys (add next / skip /
+" remove occurrence) but drop the default g<A-n>: under notimeout any
+" g-prefixed mapping would make bare g (cancel-selection) wait for a second
+" key. IdeaVim's unmap is silent when the mapping is absent, so this is safe.
+set multiple-cursors
+unmap g<A-n>
+
+" Method text object (IdeaVim VIM-380, added mid-2026) — gives meow's defun
+" thing on ,d / .d in the Meow section. Its default im / am / aM visual maps
+" must go: with notimeout they would turn visual i / a into ambiguous prefixes
+" (i would hang, and i followed by a word starting with m would select a
+" method instead of inserting). On an older IdeaVim the set line reports an
+" unknown option, the unmaps do nothing, and everything else keeps working.
+set functextobj
+xunmap im
+xunmap am
+xunmap aM
+
 " VCS / diff / error navigation (diff-hl C-x v ] / [, flymake-style next/prev)
+" — [ ] stay IDE navigation; meow's beginning/end-of-thing lives on < > below
 map ]c <action>(VcsShowNextChangeMarker)
 map [c <action>(VcsShowPrevChangeMarker)
 map ]d <action>(NextDiff)
@@ -131,6 +151,7 @@ map <leader>b   <action>(RecentFiles)
 " Vim already counts when you type a number directly; these mirror Meow, where
 " the leader carries the count because the normal-mode digits do meow-expand-N
 " (below). Normal mode only, e.g. SPC 3 then j = 3 lines down.
+" SPC 0 is omitted: once a count is live, 0 is a digit already (SPC 3 0 j = 30j).
 nnoremap <leader>1 1
 nnoremap <leader>2 2
 nnoremap <leader>3 3
@@ -237,6 +258,10 @@ map <leader>w0  <action>(EditorResetFontSize)
 map <leader><cr>     <action>(ShowIntentionActions)
 map <leader><leader> <c-^>
 map <leader>/        <action>(CommentByLineComment)
+" SPC ? ~ meow-cheatsheet: :map with no argument lists every active mapping.
+" (meow's SPC / = keypad-describe-key stays on comment — which-key already
+" narrates the leader as you type.)
+nnoremap <leader>?   :map<CR>
 
 " ============================================================================
 " IntelliJ feature leader keys (mnemonics)
@@ -501,7 +526,9 @@ map <leader>vP <action>(Vcs.Push)
 "     to act on a whole line: x (select line) then s / d / c / y.
 " This follows init.el's meow keys, not vanilla Vim: q quits, m joins, g
 " cancels the selection, v / n / N drive search, , / . grab the inner / bounds
-" of a thing, ' repeats, and u / U are the IDE's undo / redo (shared with the
+" of a thing, < / > select to a thing's beginning / end, G / R / Y stand in
+" for meow's grab (register stash + fake-cursor beacon, at the bottom of this
+" file), ' repeats, and u / U are the IDE's undo / redo (shared with the
 " Emacs C-/ stack). Emacs chords (C-a/e/k/y/w/d, C-x..., C-s, C-space, M-x)
 " still work everywhere — they are routed to the IDE up top.
 
@@ -638,10 +665,12 @@ xnoremap O <action>(EditorUnSelectWord)
 " reverse the selection (swap its active end)
 xnoremap ; o
 " inner / bounds of a thing — , = inner, . = bounds. Native vim object chars
-" still work (,( ,) ," ,t ,w ...); these add the meow-char-thing-table letters:
-"   r round  s square  c curly  g string  p paragraph  l line  b buffer
-" (d/defun has no native IdeaVim text object, so it is omitted — use ,c / .c for
-" the enclosing { } block, and ,' for single-quoted strings.)
+" still work (,( ,) ," ,t ...); these add the meow-char-thing-table letters:
+"   r round   s square   c curly   g string    e symbol   p paragraph
+"   l line    b buffer   v visual line   . sentence   d defun
+" (w stays the native inner-word — far more useful mid-edit than meow's
+" window thing, which lives on <w / >w below; ,' still gives single-quoted
+" strings.)
 nnoremap , vi
 nnoremap . va
 nnoremap ,r vi(
@@ -658,6 +687,56 @@ nnoremap ,l ^vg_
 nnoremap .l V
 nnoremap ,b ggVG
 nnoremap .b ggVG
+nnoremap ,e viW
+nnoremap .e vaW
+nnoremap ,. vis
+nnoremap .. vas
+" visual (display) line — inner and bounds coincide, a screen line has no
+" delimiters
+nnoremap ,v g0vg$
+nnoremap .v g0vg$
+" defun = the functextobj method object (set up top). :normal! v enters visual
+" without running the v (meow-visit) map, then the XO-mode <Plug> can fire —
+" nmap/xmap because a <Plug> only expands in recursive maps.
+nmap ,d :<C-u>normal! v<CR><Plug>(textobj-function-im)
+nmap .d :<C-u>normal! v<CR><Plug>(textobj-function-am)
+xmap ,d <Plug>(textobj-function-im)
+xmap .d <Plug>(textobj-function-am)
+" select TO the beginning / end of a thing — meow-beginning-of-thing /
+" meow-end-of-thing, same letters as , / . above. init.el has these on both
+" [ ] and < >; here [ ] keep the IDE's change/diff/error navigation, so < >
+" carry the table alone. The mark dance (mz ... v`zo) pins the anchor at the
+" original point and parks the cursor on the thing's edge, exactly meow's
+" selection; when the cursor isn't inside such a thing the object lookup
+" fails and the dance collapses to a harmless one-char selection. Bare <<
+" and >> still indent (unmatched keys fall through, like m's fallback), and
+" visual < / > are untouched.
+nnoremap <r mzvi(o<Esc>v`zo
+nnoremap >r mzvi(<Esc>v`zo
+nnoremap <s mzvi[o<Esc>v`zo
+nnoremap >s mzvi[<Esc>v`zo
+nnoremap <c mzvi{o<Esc>v`zo
+nnoremap >c mzvi{<Esc>v`zo
+nnoremap <g mzvi"o<Esc>v`zo
+nnoremap >g mzvi"<Esc>v`zo
+nnoremap <e mzviWo<Esc>v`zo
+nnoremap >e mzviW<Esc>v`zo
+nnoremap <p mzvipo<Esc>v`zo
+nnoremap >p mzvip<Esc>v`zo
+nnoremap <. mzviso<Esc>v`zo
+nnoremap >. mzvis<Esc>v`zo
+nnoremap <l v^
+nnoremap >l vg_
+nnoremap <v vg0
+nnoremap >v vg$
+nnoremap <b vgg0
+nnoremap >b vG$
+" w = window: top / bottom of the visible screen (H / L in a noremap RHS are
+" the native screen-line motions, not the selection extenders above)
+nnoremap <w vH0
+nnoremap >w vL$
+" (no <d / >d: keys appended after a recursive <Plug> would re-enter the
+" remapped visual o — reach a method's edges with ,d then ; instead.)
 " ' repeats the last change (meow keeps . for bounds, above)
 nnoremap ' .
 " cancel the selection (meow-cancel-selection)
@@ -713,3 +792,37 @@ xnoremap r "_dP
 " UndoManager (the same stack as Emacs C-/), so DON'T use <action>($Undo/$Redo)
 " here — those fire with no editor in their data context and silently no-op.
 nnoremap U <C-r>
+
+" --- grab: meow's secondary selection, in two IdeaVim-shaped halves ---
+" meow's G stashes a region in the 'secondary selection'; R swaps it with the
+" current region, Y refreshes it, and grab also seeds BEACON batch edits.
+" IdeaVim has no secondary selection, so the two uses split:
+"   visual G = grab: stash the selection in register g (clipboard untouched)
+"   visual R = meow-swap-grab: exchange selection and stash — select A, G,
+"              select B, R, and A and B trade places (@t is scratch space)
+"   visual Y = meow-sync-grab: restash (no overlay to sync, so same as G)
+"   normal G = BEACON: fake cursors on every occurrence of the word under
+"              the cursor (multiple-cursors AllWholeOccurrences). Edit them
+"              all at once with c / s / d / y; <Esc> ends. To pick matches
+"              one at a time instead: <A-n> adds the next (also works from a
+"              w selection), <A-x> skips it, <A-p> drops one.
+" MeowSwapGrab only READS @g (the <expr> sandbox rule again); both register
+" writes ride in the returned keys. An empty stash returns nothing, so R
+" can never eat a selection before the first grab.
+function! MeowSwapGrab()
+  if @g == ""
+    return ""
+  endif
+  return ":\<C-u>let @t=@g\<CR>gv\"gygv\"_d\"tP"
+endfunction
+xnoremap G "gy
+xnoremap <expr> R MeowSwapGrab()
+xnoremap Y "gy
+nmap G <Plug>AllWholeOccurrences
+
+" --- the rest of the QWERTY meow map, for the record ---
+" - (negative-argument) keeps its split-resize duty: vim has no negative
+" counts, and in a selection - already steps the expansion back one unit,
+" which is meow's main negative-argument use. meow's MOTION state has no
+" analog either — IdeaVim only runs inside editors, and tool windows keep
+" their own keys.

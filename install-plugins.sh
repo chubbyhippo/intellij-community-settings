@@ -18,14 +18,10 @@ $cmd installPlugins \
   "Lombook Plugin" \
   "PlantUML integration" \
   "String Manipulation" \
-  AceJump \
-  IdeaVIM \
   StringToolsPlugin \
   com.fwdekker.randomness \
   com.github.camork.fileExpander \
   com.intellij.plugins.macoskeymap \
-  com.joshestein.ideavim-quickscope \
-  com.julienphalip.ideavim.peekaboo \
   dev.flikas.idea.spring.boot.assistant.plugin \
   dev.maheshbabu11.http-client-plus \
   dev.turingcomplete.intellijdevelopertoolsplugins \
@@ -35,5 +31,4 @@ $cmd installPlugins \
   mobi.hsz.idea.gitignore \
   nl.bryanderidder.regexrenamefiles \
   org.asciidoctor.intellij.asciidoc \
-  org.jetbrains.IdeaVim-EasyMotion \
   org.jetbrains.jumpToLine

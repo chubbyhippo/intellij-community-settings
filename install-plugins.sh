@@ -25,7 +25,6 @@ $cmd installPlugins \
   dev.flikas.idea.spring.boot.assistant.plugin \
   dev.maheshbabu11.http-client-plus \
   dev.turingcomplete.intellijdevelopertoolsplugins \
-  eu.theblob42.idea.whichkey \
   izhangzhihao.rainbow.brackets.lite \
   me.bechberger.jfrplugin \
   mobi.hsz.idea.gitignore \

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 RAW_INTELLIJ_SETTINGS_URL="https://raw.githubusercontent.com/chubbyhippo/intellij-community-settings/refs/heads/main"
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 cmd=idea
 if uname | grep -q "^MINGW"; then

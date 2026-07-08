@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 RAW_INTELLIJ_SETTINGS_URL="https://raw.githubusercontent.com/chubbyhippo/intellij-community-settings/refs/heads/main"
-RAW_IDEAVIM_URL="https://raw.githubusercontent.com/chubbyhippo/intellij-community-settings/refs/heads/main/ideavim"
 
 # config paths
 for config_path in \
@@ -38,9 +37,6 @@ for config_path in \
 
   fi
 done
-
-# install .ideavimrc
-curl -ksS "$RAW_IDEAVIM_URL/.ideavimrc" -o ~/.ideavimrc
 
 # install plugins
 curl -ksS "$RAW_INTELLIJ_SETTINGS_URL/install-plugins.sh" | /usr/bin/env sh

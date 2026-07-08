@@ -31,6 +31,3 @@ for config_path in \
 
   fi
 done
-
-# save .ideavimrc
-cp -f "$HOME"/.ideavimrc ./ideavim/.ideavimrc

@@ -1,11 +1,13 @@
 # intellij-community-settings
 
-IntelliJ IDEA Community settings — code style, editor options, per-OS
-keymaps, file templates — and a plugin install script. Modal editing comes
-from [ideameow](https://github.com/chubbyhippo/ideameow), a native port of
-Emacs [meow](https://github.com/meow-edit/meow) — its keymap ships inside
-the plugin; override keys in `~/.ideameowrc` (`SPC c m` opens it, `SPC c M`
-reloads it).
+IntelliJ IDEA Community settings — code style, editor options, per-OS keymaps,
+file templates — and a plugin install script.
+
+| Item | Value |
+|---|---|
+| Modal editing | [ideameow](https://github.com/chubbyhippo/ideameow), a native port of Emacs [meow](https://github.com/meow-edit/meow) |
+| Its keymap | ships inside the plugin |
+| Override keys in | `~/.ideameowrc` — `SPC c m` opens it, `SPC c M` reloads it |
 
 ## Install settings + plugins
 
@@ -15,18 +17,16 @@ curl -s https://raw.githubusercontent.com/chubbyhippo/intellij-community-setting
 
 ## Install ideameow
 
-1. Disable or uninstall IdeaVim if installed (both plugins intercept
-   typing).
+| Step | Do |
+|---|---|
+| 1 | Disable or uninstall IdeaVim — both plugins intercept typing |
+| 2 | `git clone --depth 1 https://github.com/chubbyhippo/ideameow.git && cd ideameow && ./setup.sh` |
+| 3 | Restart the IDE |
 
-2. Build and install into every detected 2026.1+ IDE (needs Java 21, or
-   [mise](https://mise.jdx.dev); from WSL this also reaches the Windows
-   IDEs):
-
-   ```sh
-   git clone --depth 1 https://github.com/chubbyhippo/ideameow.git && cd ideameow && ./setup.sh
-   ```
-
-3. Restart the IDE.
+| Requirement | Value |
+|---|---|
+| Toolchain | Java 21, or [mise](https://mise.jdx.dev) |
+| Targets | every detected 2026.1+ IDE; from WSL, the Windows IDEs too |
 
 ## Install plugins only
 
